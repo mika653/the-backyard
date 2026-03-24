@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu — The Backyard Place | Kalibo, Aklan</title>
+  <meta name="description" content="Full menu of The Backyard Place in Kalibo, Aklan. Signature platters, seafood, Filipino favorites, cocktails, and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@500;700&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bark: #4A2C17;
+      --bark-light: #6B4226;
+      --cream: #FFFDF5;
+      --sand: #FFF3DC;
+      --palm: #3D8B37;
+      --palm-light: #5CB356;
+      --ocean: #20A4A4;
+      --ocean-light: #3CC8C8;
+      --sunset: #D4870E;
+      --sunset-glow: #E8960A;
+      --amber: #D4870E;
+      --amber-light: #F0A81C;
+      --coral: #E86A3A;
+      --night: #2A1A0A;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bark);
+      color: var(--cream);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ── Ambient glow ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 10% 10%, rgba(61, 139, 55, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 90%, rgba(212, 135, 14, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(212, 135, 14, 0.04) 0%, transparent 60%);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(74, 44, 23, 0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 34px;
+      width: auto;
+      filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4));
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.4rem 0.6rem;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: rgba(255,255,255,0.15);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--cream);
+      margin: 5px 0;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+
+    .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(74, 44, 23, 0.97);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .nav-links.open { right: 0; }
+      .nav-links a { font-size: 1rem; padding: 0.75rem 1.5rem; }
+      .menu-toggle { display: block; }
+    }
+
+    /* ── HERO HEADER ── */
+    .menu-hero {
+      padding: 7rem 1.5rem 3rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .menu-hero-label {
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      color: var(--sunset-glow);
+      margin-bottom: 0.25rem;
+    }
+
+    .menu-hero-title {
+      font-family: 'Fredoka', sans-serif; font-weight: 600;
+      font-size: clamp(2.5rem, 10vw, 4.5rem);
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+    }
+
+    .menu-hero-sub {
+      color: rgba(255, 248, 236, 0.6);
+      font-size: 0.95rem;
+      max-width: 460px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── CATEGORY TABS ── */
+    .cat-tabs {
+      position: sticky;
+      top: 52px;
+      z-index: 100;
+      background: rgba(74, 44, 23, 0.92);
+      backdrop-filter: blur(14px);
+      padding: 0.75rem 1rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      display: flex;
+      gap: 0.4rem;
+      justify-content: flex-start;
+    }
+
+    .cat-tabs::-webkit-scrollbar { display: none; }
+
+    .cat-tab {
+      padding: 0.45rem 1rem;
+      background: rgba(255, 248, 236, 0.06);
+      border: 1px solid rgba(255, 248, 236, 0.1);
+      color: var(--cream);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      border-radius: 50px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+
+    .cat-tab:hover,
+    .cat-tab.active {
+      background: var(--sunset);
+      border-color: var(--sunset);
+    }
+
+    /* ── MENU SECTIONS ── */
+    .menu-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .menu-category {
+      margin-bottom: 3rem;
+      scroll-margin-top: 110px;
+    }
+
+    .cat-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(255, 248, 236, 0.08);
+    }
+
+    .cat-emoji {
+      font-size: 1.6rem;
+    }
+
+    .cat-title {
+      font-family: 'Fredoka', sans-serif; font-weight: 600;
+      font-size: 1.5rem;
+      color: var(--cream);
+    }
+
+    .cat-count {
+      font-family: 'Caveat', cursive;
+      font-size: 0.85rem;
+      color: var(--sunset-glow);
+      margin-left: auto;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.75rem 0.85rem;
+      background: rgba(255, 248, 236, 0.04);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 248, 236, 0.04);
+      transition: background 0.3s;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 248, 236, 0.08);
+    }
+
+    .menu-item-name {
+      color: var(--cream);
+      font-weight: 500;
+      font-size: 0.88rem;
+    }
+
+    .menu-item-tag {
+      font-family: 'Caveat', cursive;
+      font-size: 0.72rem;
+      color: var(--palm-light);
+      margin-left: 0.35rem;
+    }
+
+    .menu-item-price {
+      color: var(--sunset-glow);
+      font-weight: 600;
+      font-size: 0.88rem;
+      white-space: nowrap;
+      margin-left: 0.75rem;
+    }
+
+    .menu-note {
+      font-size: 0.78rem;
+      color: rgba(255, 248, 236, 0.35);
+      padding: 0.5rem 0;
+      font-style: italic;
+    }
+
+    /* ── FISH COOKING STYLES ── */
+    .cooking-styles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      padding: 0.5rem 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .cooking-badge {
+      padding: 0.2rem 0.6rem;
+      background: rgba(212, 135, 14, 0.12);
+      border: 1px solid rgba(212, 135, 14, 0.2);
+      color: var(--sunset-glow);
+      font-size: 0.68rem;
+      border-radius: 50px;
+      font-weight: 500;
+    }
+
+    /* ── STUDENT MEALS CALLOUT ── */
+    .student-callout {
+      background: rgba(61, 139, 55, 0.1);
+      border: 1px solid rgba(61, 139, 55, 0.2);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      color: var(--palm-light);
+    }
+
+    /* ── CTA BANNER ── */
+    .menu-cta {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .menu-cta p {
+      font-family: 'Caveat', cursive;
+      font-size: 1.15rem;
+      color: var(--sunset-glow);
+      margin-bottom: 0.75rem;
+    }
+
+    .menu-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2.5rem;
+      background: var(--sunset);
+      color: var(--cream);
+      text-decoration: none;
+      font-family: 'Fredoka', sans-serif; font-weight: 600;
+      font-size: 1rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(212, 135, 14, 0.3);
+      transition: all 0.3s;
+    }
+
+    .menu-cta a:hover {
+      background: var(--sunset-glow);
+      transform: translateY(-2px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--night);
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+    }
+
+    footer .footer-logo {
+      font-family: 'Fredoka', sans-serif; font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+
+    footer p {
+      color: rgba(255, 248, 236, 0.35);
+      font-size: 0.75rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* back to top */
+    .back-to-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 44px;
+      height: 44px;
+      background: var(--sunset);
+      color: var(--cream);
+      border: none;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(232, 116, 42, 0.35);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      z-index: 100;
+    }
+    .back-to-top.show { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { background: var(--sunset-glow); transform: scale(1.1); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="94733356_2951854864893730_1453364319617024000_n.jpg" alt="The Backyard Place Logo">
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="menu.html" class="active">Menu</a>
+      <a href="index.html#drinks">Drinks</a>
+      <a href="index.html#groups">Groups</a>
+      <a href="index.html#contact">Visit Us</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="menu-hero">
+    <p class="menu-hero-label">What's Cookin'</p>
+    <h1 class="menu-hero-title">Our Menu</h1>
+    <p class="menu-hero-sub">From sizzling sisig to fresh-catch seafood — we bring the best flavors of Aklan right to your table.</p>
+  </div>
+
+  <!-- STICKY CATEGORY TABS -->
+  <div class="cat-tabs" id="catTabs">
+    <button class="cat-tab active" data-target="signatures">Signatures</button>
+    <button class="cat-tab" data-target="seafood">Seafood</button>
+    <button class="cat-tab" data-target="fish">Fish</button>
+    <button class="cat-tab" data-target="shrimp">Shrimp</button>
+    <button class="cat-tab" data-target="noodles">Noodles</button>
+    <button class="cat-tab" data-target="snacks">Snacks</button>
+    <button class="cat-tab" data-target="pasta">Pasta</button>
+    <button class="cat-tab" data-target="student">Student Meals</button>
+    <button class="cat-tab" data-target="rice">Rice</button>
+    <button class="cat-tab" data-target="desserts">Desserts</button>
+    <button class="cat-tab" data-target="cocktails">Cocktails</button>
+    <button class="cat-tab" data-target="shakes">Shakes</button>
+    <button class="cat-tab" data-target="drinks">Drinks</button>
+  </div>
+
+  <!-- MENU CONTENT -->
+  <div class="menu-content">
+
+    <!-- SIGNATURES -->
+    <div class="menu-category reveal" id="signatures">
+      <div class="cat-header">
+        <span class="cat-emoji">🔥</span>
+        <span class="cat-title">Signature Platters & Sashimi</span>
+        <span class="cat-count">6 items</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Seafood Platter</span><span class="menu-item-tag">best seller</span></div><span class="menu-item-price">₱1,299</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">All Meat Platter</span></div><span class="menu-item-price">₱1,299</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Bad Boy Platter</span><span class="menu-item-tag">best seller</span></div><span class="menu-item-price">₱1,399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Tuna Sashimi</span></div><span class="menu-item-price">₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Salmon Sashimi</span></div><span class="menu-item-price">₱399</span></div>
+      </div>
+    </div>
+
+    <!-- SHRIMP -->
+    <div class="menu-category reveal" id="shrimp">
+      <div class="cat-header">
+        <span class="cat-emoji">🦐</span>
+        <span class="cat-title">Shrimp</span>
+        <span class="cat-count">9 items</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Camaron Rebusado</span></div><span class="menu-item-price">₱429</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Butter Garlic Shrimps</span></div><span class="menu-item-price">₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Tempura Ala Backyard</span><span class="menu-item-tag">new</span></div><span class="menu-item-price">₱439</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Special Shrimp Kinilaw</span></div><span class="menu-item-price">₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Nilasing na Hipon</span></div><span class="menu-item-price">₱429</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Shrimp Sinigang</span></div><span class="menu-item-price">₱429</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Sizzling Gambas</span></div><span class="menu-item-price">₱359</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Salted Egg Shrimp</span><span class="menu-item-tag">new</span></div><span class="menu-item-price">₱439</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Sizzling Mixed Seafood</span></div><span class="menu-item-price">₱349</span></div>
+      </div>
+    </div>
+
+    <!-- FISH -->
+    <div class="menu-category reveal" id="fish">
+      <div class="cat-header">
+        <span class="cat-emoji">🐟</span>
+        <span class="cat-title">Fish</span>
+        <span class="cat-count">16 items</span>
+      </div>
+      <div class="cooking-styles">
+        <span class="cooking-badge">Grilled</span>
+        <span class="cooking-badge">Fried</span>
+        <span class="cooking-badge">Steamed</span>
+        <span class="cooking-badge">Sinigang</span>
+        <span class="cooking-badge">Tinola</span>
+        <span class="cooking-badge">Sweet & Sour</span>
+        <span class="cooking-badge">Lemon Butter</span>
+        <span class="cooking-badge">Sizzling</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Blue Marlin Sliced</span></div><span class="menu-item-price">Per Gram</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Tangigue</span></div><span class="menu-item-price">Per Gram</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Mamsa</span></div><span class="menu-item-price">Per Gram</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Boneless Bangus</span></div><span class="menu-item-price">Per Gram</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Manga-gat</span></div><span class="menu-item-price">Per Gram</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Tuna Belly</span></div><span class="menu-item-price">Per Gram</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Tuna Sliced</span></div><span class="menu-item-price">Per Gram</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Binabak na Bangus</span></div><span class="menu-item-price">₱349</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Tuna Panga</span></div><span class="menu-item-price">Per Gram</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Pampano</span></div><span class="menu-item-price">Per Gram</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Salmon</span></div><span class="menu-item-price">Per Gram</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Lapu-Lapu</span></div><span class="menu-item-price">Per Gram</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Bangus Sisig</span></div><span class="menu-item-price">₱319</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Cheesy Grilled Bangus</span></div><span class="menu-item-price">₱429</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Red Snapper (Maya-Maya)</span></div><span class="menu-item-price">Per Gram</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Backyard's Special Fish Kinilaw</span></div><span class="menu-item-price">₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Grilled Boneless Bangus</span></div><span class="menu-item-price">₱299</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Backyard's Special Sinuglan</span></div><span class="menu-item-price">₱419</span></div>
+      </div>
+    </div>
+
+    <!-- SEAFOOD (other) -->
+    <div class="menu-category reveal" id="seafood">
+      <div class="cat-header">
+        <span class="cat-emoji">🦑</span>
+        <span class="cat-title">Seafood</span>
+        <span class="cat-count">Squid, Crabs & more</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Calamares</span></div><span class="menu-item-price">Market</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Steamed Talaba</span></div><span class="menu-item-price">Market</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Paco Fern Salad</span></div><span class="menu-item-price">Market</span></div>
+      </div>
+    </div>
+
+    <!-- NOODLES -->
+    <div class="menu-category reveal" id="noodles">
+      <div class="cat-header">
+        <span class="cat-emoji">🍜</span>
+        <span class="cat-title">Noodles</span>
+        <span class="cat-count">10 items</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Backyard's Seafood Canton</span><span class="menu-item-tag">best seller</span></div><span class="menu-item-price">₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Special Bihon Guisado</span></div><span class="menu-item-price">₱379</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Crispy Pancit Canton</span></div><span class="menu-item-price">₱379</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Backyard's Special Bam-i</span></div><span class="menu-item-price">₱489</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Sotanghon Guisado</span></div><span class="menu-item-price">₱479</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Backyard's Pancit Chami</span></div><span class="menu-item-price">₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Crispy Palabok</span></div><span class="menu-item-price">₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Pancit Molo Soup</span></div><span class="menu-item-price">₱299</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Beef Yake Udon Noodles</span></div><span class="menu-item-price">₱299</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Pancit Bihon Guisado sa Bilao</span><span class="menu-item-tag">party size</span></div><span class="menu-item-price">₱1,099</span></div>
+      </div>
+    </div>
+
+    <!-- SNACKS & BURGERS -->
+    <div class="menu-category reveal" id="snacks">
+      <div class="cat-header">
+        <span class="cat-emoji">🍔</span>
+        <span class="cat-title">Snacks & Burgers</span>
+        <span class="cat-count">6 items</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Bacon Special Burger</span></div><span class="menu-item-price">₱169</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Backyard's Special Burger</span><span class="menu-item-tag">popular</span></div><span class="menu-item-price">₱149</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Onion Rings</span></div><span class="menu-item-price">₱199</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">French Fries</span></div><span class="menu-item-price">₱109</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Burger Fries</span></div><span class="menu-item-price">₱299</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Backyard's Nachos Overload</span></div><span class="menu-item-price">₱399</span></div>
+      </div>
+    </div>
+
+    <!-- PASTA -->
+    <div class="menu-category reveal" id="pasta">
+      <div class="cat-header">
+        <span class="cat-emoji">🍝</span>
+        <span class="cat-title">Pasta</span>
+        <span class="cat-count">5 items</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Aglio-Olio</span></div><span class="menu-item-price">₱199</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Creamy Carbonara</span></div><span class="menu-item-price">₱189</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Seafood Marinara</span></div><span class="menu-item-price">₱199</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Spaghetti w/ Homemade Meatballs</span></div><span class="menu-item-price">₱189</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Backyard's Bolognese</span></div><span class="menu-item-price">₱199</span></div>
+      </div>
+    </div>
+
+    <!-- STUDENT MEALS -->
+    <div class="menu-category reveal" id="student">
+      <div class="cat-header">
+        <span class="cat-emoji">🎓</span>
+        <span class="cat-title">Student Meals</span>
+        <span class="cat-count">7 items</span>
+      </div>
+      <div class="student-callout">
+        📝 Served with Rice, Iced Tea, and Soup
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Pork Sisig</span></div><span class="menu-item-price">₱159</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Lumpia Shanghai</span></div><span class="menu-item-price">₱159</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Burgersteak</span></div><span class="menu-item-price">₱159</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Porkchop</span></div><span class="menu-item-price">₱159</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Fried Chicken Wings</span></div><span class="menu-item-price">₱159</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Hungarian Sausage</span></div><span class="menu-item-price">₱159</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Garlic Pepper Beef</span></div><span class="menu-item-price">₱179</span></div>
+      </div>
+      <p class="menu-note">Add-ons: Side-up Egg ₱15 · Atsara ₱50 · Garlic Bread ₱15</p>
+    </div>
+
+    <!-- RICE -->
+    <div class="menu-category reveal" id="rice">
+      <div class="cat-header">
+        <span class="cat-emoji">🍚</span>
+        <span class="cat-title">Rice</span>
+        <span class="cat-count">5 items</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Plain Rice</span></div><span class="menu-item-price">₱40 / ₱160</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Garlic Rice</span></div><span class="menu-item-price">₱45 / ₱170</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Java Rice</span></div><span class="menu-item-price">₱49 / ₱179</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Yang Chao Rice</span></div><span class="menu-item-price">₱225</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Special Aligue Rice</span></div><span class="menu-item-price">₱299</span></div>
+      </div>
+      <p class="menu-note">Cup / Platter pricing shown where applicable</p>
+    </div>
+
+    <!-- DESSERTS -->
+    <div class="menu-category reveal" id="desserts">
+      <div class="cat-header">
+        <span class="cat-emoji">🍨</span>
+        <span class="cat-title">Desserts</span>
+        <span class="cat-count">8 items</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Fresh Fruit Platter in Season</span></div><span class="menu-item-price">₱499</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Backyard's Special Halo-Halo</span><span class="menu-item-tag">must try</span></div><span class="menu-item-price">₱179</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Mais Con-Yelo</span></div><span class="menu-item-price">₱159</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Saba Con Yelo</span></div><span class="menu-item-price">₱149</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Ube Ice Cream</span></div><span class="menu-item-price">₱119</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Vanilla Ice Cream</span></div><span class="menu-item-price">₱119</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Special Banana Split</span></div><span class="menu-item-price">₱249</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Fresh Mango</span></div><span class="menu-item-price">₱89</span></div>
+      </div>
+      <p class="menu-note">Please see display for available cakes</p>
+    </div>
+
+    <!-- COCKTAILS -->
+    <div class="menu-category reveal" id="cocktails">
+      <div class="cat-header">
+        <span class="cat-emoji">🍹</span>
+        <span class="cat-title">Cocktails</span>
+        <span class="cat-count">Glass / Tower</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Mojito</span></div><span class="menu-item-price">₱149 / ₱459</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Margarita</span></div><span class="menu-item-price">₱149 / ₱459</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Daiquiri</span></div><span class="menu-item-price">₱139 / ₱459</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Mai-Tai</span></div><span class="menu-item-price">₱139 / ₱449</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Boracay Bombener</span></div><span class="menu-item-price">₱139 / ₱449</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Pinacolada</span></div><span class="menu-item-price">₱139 / ₱449</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Long Island Tea</span></div><span class="menu-item-price">₱139 / ₱449</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Tequila Sunrise</span></div><span class="menu-item-price">₱139 / ₱449</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Cosmopolitan</span></div><span class="menu-item-price">₱149</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Shark Lagoon</span></div><span class="menu-item-price">₱149 / ₱459</span></div>
+      </div>
+      <p class="menu-note">More cocktails available — ask your server!</p>
+    </div>
+
+    <!-- WINE -->
+    <div class="menu-category reveal">
+      <div class="cat-header">
+        <span class="cat-emoji">🍷</span>
+        <span class="cat-title">Wine</span>
+        <span class="cat-count">Glass / Bottle</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Moscato</span></div><span class="menu-item-price">₱1,200</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Pink Moscato</span></div><span class="menu-item-price">₱1,200</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Red Moscato</span></div><span class="menu-item-price">₱1,200</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Shiraz</span></div><span class="menu-item-price">₱1,200</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Wolf Blass</span></div><span class="menu-item-price">₱250 / ₱950</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Hardys</span></div><span class="menu-item-price">₱250 / ₱950</span></div>
+      </div>
+    </div>
+
+    <!-- FRUIT SHAKES -->
+    <div class="menu-category reveal" id="shakes">
+      <div class="cat-header">
+        <span class="cat-emoji">🥭</span>
+        <span class="cat-title">Fruit Shakes</span>
+        <span class="cat-count">Glass / Pitcher</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Mango</span></div><span class="menu-item-price">₱139 / ₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Mango Banana</span></div><span class="menu-item-price">₱149 / ₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Mango Buko</span></div><span class="menu-item-price">₱149 / ₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Banana Oreo</span></div><span class="menu-item-price">₱149 / ₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Banana Choco Peanut</span></div><span class="menu-item-price">₱149 / ₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Buko</span></div><span class="menu-item-price">₱139 / ₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Avocado</span><span class="menu-item-tag">seasonal</span></div><span class="menu-item-price">₱139</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Dragon Fruit</span><span class="menu-item-tag">seasonal</span></div><span class="menu-item-price">₱149</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Cucumber Calamansi</span></div><span class="menu-item-price">₱149 / ₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Calamansi</span></div><span class="menu-item-price">₱129 / ₱299</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Pineapple</span></div><span class="menu-item-price">₱129 / ₱299</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Watermelon</span></div><span class="menu-item-price">₱129 / ₱399</span></div>
+      </div>
+    </div>
+
+    <!-- SIGNATURE SHAKES & HARD DRINKS -->
+    <div class="menu-category reveal">
+      <div class="cat-header">
+        <span class="cat-emoji">🥤</span>
+        <span class="cat-title">Signature Shakes & Hard Drinks</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Tripple C</span></div><span class="menu-item-price">₱149 / ₱399</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Chili Shake</span></div><span class="menu-item-price">₱109</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Jack Daniels</span></div><span class="menu-item-price">₱2,500</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Solera Fundador</span></div><span class="menu-item-price">₱1,200</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Black Label</span></div><span class="menu-item-price">₱2,500</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Light Fundador</span></div><span class="menu-item-price">₱950</span></div>
+      </div>
+    </div>
+
+    <!-- DRINKS -->
+    <div class="menu-category reveal" id="drinks">
+      <div class="cat-header">
+        <span class="cat-emoji">🧊</span>
+        <span class="cat-title">Drinks</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Lemonade</span></div><span class="menu-item-price">₱175 / ₱69</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Pink Lemonade</span></div><span class="menu-item-price">₱175 / ₱69</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Lemon Iced Tea</span></div><span class="menu-item-price">₱175 / ₱69</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Raspberry</span></div><span class="menu-item-price">₱185 / ₱69</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Bottled Water</span></div><span class="menu-item-price">₱59</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Coke / Coke Zero</span></div><span class="menu-item-price">₱60 / ₱35</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Mountain Dew</span></div><span class="menu-item-price">₱60 / ₱35</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Sprite</span></div><span class="menu-item-price">₱60 / ₱35</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Royal</span></div><span class="menu-item-price">₱60 / ₱35</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Pineapple Juice</span></div><span class="menu-item-price">₱60 / ₱35</span></div>
+      </div>
+    </div>
+
+    <!-- HOT BEVERAGES -->
+    <div class="menu-category reveal">
+      <div class="cat-header">
+        <span class="cat-emoji">☕</span>
+        <span class="cat-title">Hot Beverages</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Hot Lemon Ginger</span></div><span class="menu-item-price">₱119</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Hot Calamansi Juice</span></div><span class="menu-item-price">₱85</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Hot Tea</span></div><span class="menu-item-price">₱65</span></div>
+      </div>
+    </div>
+
+    <!-- FRESH FRUIT JUICES -->
+    <div class="menu-category reveal">
+      <div class="cat-header">
+        <span class="cat-emoji">🍋</span>
+        <span class="cat-title">Fresh Fruit Juices</span>
+        <span class="cat-count">Pitcher / Glass</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="menu-item-name">Buko Juice</span></div><span class="menu-item-price">₱299 / ₱75</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Calamansi Juice</span></div><span class="menu-item-price">₱299 / ₱109</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Pineapple Juice</span></div><span class="menu-item-price">₱299 / ₱129</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Mango Juice</span></div><span class="menu-item-price">₱299 / ₱129</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Watermelon Juice</span></div><span class="menu-item-price">₱299 / ₱129</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Cucumber and Calamansi</span></div><span class="menu-item-price">₱299 / ₱129</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Carrot Juice</span></div><span class="menu-item-price">₱299 / ₱119</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <div class="menu-cta">
+    <p>Ready to feast? Reserve your table now!</p>
+    <a href="tel:09511306264">📞 Call 0951 130 6264</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="94733356_2951854864893730_1453364319617024000_n.jpg" alt="The Backyard Place" style="width:60px;height:auto;margin-bottom:0.75rem;opacity:0.8;">
+    <p>Old Buswang, Kalibo, Aklan &nbsp;|&nbsp; 0951 130 6264</p>
+    <p style="margin-top:0.3rem;"><a href="https://www.facebook.com/backyardkalibo" target="_blank" rel="noopener" style="color:rgba(255,248,236,0.5);text-decoration:none;">Follow us on Facebook</a></p>
+    <p style="margin-top:0.5rem;">&copy; 2026 The Backyard Place. All rights reserved.</p>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script>
+    // ── Mobile Menu ──
+    const toggle = document.getElementById('menuToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      links.classList.toggle('open');
+    });
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        toggle.classList.remove('active');
+        links.classList.remove('open');
+      });
+    });
+
+    // ── Category Tab Scrolling ──
+    document.querySelectorAll('.cat-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const target = document.getElementById(tab.dataset.target);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ── Highlight active tab on scroll ──
+    const categories = document.querySelectorAll('.menu-category[id]');
+    const tabs = document.querySelectorAll('.cat-tab[data-target]');
+    const tabContainer = document.getElementById('catTabs');
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tabs.forEach(t => t.classList.remove('active'));
+          const activeTab = document.querySelector(`.cat-tab[data-target="${entry.target.id}"]`);
+          if (activeTab) {
+            activeTab.classList.add('active');
+            // scroll tab into view
+            activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '-120px 0px -60% 0px' });
+
+    categories.forEach(cat => scrollObserver.observe(cat));
+
+    // ── Reveal on scroll ──
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── Back to Top ──
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      btt.classList.toggle('show', window.scrollY > 400);
+    });
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+</body>
+</html>

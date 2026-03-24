@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Backyard Place — Eat • Grill • Chill | Kalibo, Aklan</title>
+  <meta name="description" content="The Backyard Place in Kalibo, Aklan. Your go-to spot to eat, grill, and chill. Cocktails, Filipino food, and island vibes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@500;700&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bark: #4A2C17;
+      --bark-light: #6B4226;
+      --cream: #FFFDF5;
+      --sand: #FFF3DC;
+      --palm: #3D8B37;
+      --palm-light: #5CB356;
+      --ocean: #20A4A4;
+      --ocean-light: #3CC8C8;
+      --sunset: #D4870E;
+      --sunset-glow: #E8960A;
+      --amber: #D4870E;
+      --amber-light: #F0A81C;
+      --coral: #E86A3A;
+      --night: #2A1A0A;
+      --radius: 18px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--bark);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ─── RUSTIC ELEMENTS ─── */
+
+    /* leaf ornament divider between sections */
+    .rustic-divider {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.75rem; padding: 1.5rem 0; max-width: 300px; margin: 0 auto;
+    }
+    .rustic-divider::before, .rustic-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--bark-light), transparent);
+      opacity: 0.25;
+    }
+    .rustic-divider .rd-leaf { font-size: 1rem; opacity: 0.5; }
+
+    /* rope-style dashed borders */
+    .rope-border {
+      border: 2px dashed rgba(74,44,23,0.12) !important;
+      box-shadow: none !important;
+    }
+
+    /* wood grain texture overlay for dark tiles */
+    .tile-dark {
+      position: relative;
+    }
+    .tile-dark::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      opacity: 0.04; border-radius: var(--radius);
+      background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 3px,
+        rgba(255,253,245,0.15) 3px,
+        rgba(255,253,245,0.15) 4px
+      );
+    }
+
+    /* hand-drawn underline on section titles */
+    .section-divider h2 {
+      position: relative; display: inline-block;
+    }
+    .section-divider h2::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 10%; right: 10%;
+      height: 3px; border-radius: 2px;
+      background: var(--amber);
+      opacity: 0.4;
+      transform: rotate(-0.5deg);
+    }
+
+    /* woven/crosshatch pattern for sand tiles */
+    .tile-sand {
+      position: relative;
+    }
+    .tile-sand::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      opacity: 0.03; border-radius: var(--radius);
+      background-image:
+        linear-gradient(45deg, var(--bark) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--bark) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--bark) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--bark) 75%);
+      background-size: 8px 8px;
+      background-position: 0 0, 0 4px, 4px -4px, -4px 0;
+    }
+
+    /* bamboo horizontal rule */
+    .bamboo-hr {
+      border: none; height: 3px; margin: 0;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        var(--amber) 15%,
+        var(--sunset-glow) 50%,
+        var(--amber) 85%,
+        transparent 100%
+      );
+      opacity: 0.2;
+      border-radius: 2px;
+    }
+
+    /* corner leaf decoration on photo tiles */
+    .tile-photo::before {
+      content: '🌿'; position: absolute; top: 0.75rem; right: 0.75rem;
+      font-size: 1.2rem; z-index: 2; opacity: 0.6;
+      filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.4));
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0.6rem 1.25rem;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(74, 44, 23, 0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 38px; width: auto; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4)); transition: height 0.3s; }
+    nav.scrolled .nav-logo img { height: 32px; }
+
+    .nav-links { display: flex; gap: 0.2rem; }
+    .nav-links a {
+      color: var(--cream); text-decoration: none; font-size: 0.7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em; padding: 0.4rem 0.6rem;
+      border-radius: 8px; transition: background 0.3s; text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    }
+    .nav-links a:hover { background: rgba(255,255,255,0.15); }
+
+    .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 1002; }
+    .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--cream); margin: 5px 0; transition: all 0.3s; border-radius: 2px; }
+    .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; opacity: 0; transition: opacity 0.4s; }
+    .nav-backdrop.show { opacity: 1; }
+
+    @media (max-width: 640px) {
+      .nav-backdrop { display: block; pointer-events: none; }
+      .nav-backdrop.show { pointer-events: auto; }
+      .nav-links {
+        position: fixed; top: 0; right: -100%; width: 70%; height: 100vh;
+        background: rgba(74, 44, 23, 0.97); backdrop-filter: blur(20px);
+        flex-direction: column; justify-content: center; align-items: center; gap: 0.5rem;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1001;
+      }
+      .nav-links.open { right: 0; }
+      .nav-links a { font-size: 1rem; padding: 0.75rem 1.5rem; text-shadow: none; }
+      .menu-toggle { display: block; }
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; min-height: 100vh; min-height: 100svh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding: 2rem 1.5rem; overflow: hidden;
+    }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(42,26,10,0.82) 0%, rgba(42,26,10,0.55) 40%, rgba(42,26,10,0.45) 60%, rgba(42,26,10,0.8) 100%);
+    }
+
+    .hero-content {
+      position: relative; z-index: 2; max-width: 600px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    .hero-logo {
+      display: block;
+      width: clamp(130px, 32vw, 200px); height: auto; margin-bottom: 1.25rem;
+      filter: drop-shadow(4px 4px 8px rgba(0,0,0,0.5));
+      animation: fadeUp 0.8s ease-out 0.2s both;
+    }
+    .hero-tagline {
+      display: block; width: fit-content;
+      font-family: 'Fredoka', sans-serif; font-weight: 500;
+      font-size: 1rem; color: var(--cream);
+      background: rgba(212,135,14,0.3); border: 1px solid rgba(240,168,28,0.35);
+      padding: 0.35rem 1.3rem; border-radius: 50px;
+      margin-bottom: 0.75rem; letter-spacing: 0.05em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      animation: fadeUp 0.8s ease-out 0.35s both;
+    }
+    .hero-sub {
+      display: block;
+      font-family: 'Fredoka', sans-serif; font-weight: 600;
+      font-size: clamp(1rem, 4vw, 1.5rem); color: var(--cream);
+      letter-spacing: 0.3em; margin-bottom: 1.75rem; opacity: 0.9;
+      animation: fadeUp 0.8s ease-out 0.5s both;
+    }
+    .hero-sub .dot { color: var(--amber-light); margin: 0 0.1em; }
+
+    .hero-actions { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; animation: fadeUp 0.8s ease-out 0.65s both; }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 2.2rem; background: var(--amber); color: var(--cream);
+      text-decoration: none; font-family: 'Fredoka', sans-serif; font-weight: 600;
+      font-size: 1rem; border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(212,135,14,0.4); transition: all 0.3s;
+    }
+    .hero-cta:hover { background: var(--amber-light); transform: translateY(-2px); box-shadow: 0 6px 28px rgba(212,135,14,0.5); }
+    .hero-cta-secondary {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.55rem 1.4rem; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+      color: var(--cream); text-decoration: none; font-size: 0.82rem; font-weight: 600;
+      border-radius: 50px; transition: all 0.3s;
+    }
+    .hero-cta-secondary:hover { background: rgba(255,255,255,0.22); }
+    .hero-cta-secondary svg { width: 14px; height: 14px; fill: currentColor; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 4;
+      color: var(--cream); opacity: 0.4; font-size: 0.6rem; text-transform: uppercase;
+      letter-spacing: 0.2em; display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+      animation: fadeUp 0.8s ease-out 1s both;
+    }
+    .scroll-hint .arrow { width: 16px; height: 16px; border-right: 2px solid var(--cream); border-bottom: 2px solid var(--cream); transform: rotate(45deg); animation: bounce 2s ease-in-out infinite; }
+    @keyframes bounce { 0%, 100% { transform: rotate(45deg) translateY(0); } 50% { transform: rotate(45deg) translateY(5px); } }
+
+    /* ─── BENTO SHARED ─── */
+    .bento-section {
+      padding: 3rem 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) { .bento-section { padding: 4rem 1.5rem; } }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    @media (min-width: 640px) {
+      .bento-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 900px) {
+      .bento-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .bento-tile {
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.35s ease;
+    }
+
+    .bento-tile:hover { transform: translateY(-3px); }
+
+    /* tile types */
+    .tile-photo {
+      position: relative;
+      min-height: 220px;
+    }
+
+    .tile-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      position: absolute; inset: 0;
+      transition: transform 0.6s ease;
+    }
+
+    .tile-photo:hover img { transform: scale(1.04); }
+
+    .tile-photo .photo-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 2.5rem 1.25rem 1rem;
+      background: linear-gradient(transparent, rgba(42,26,10,0.85));
+      color: var(--cream);
+    }
+
+    .tile-photo .photo-label h3 {
+      font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 1.1rem;
+    }
+
+    .tile-photo .photo-label p {
+      font-size: 0.78rem; opacity: 0.7; margin-top: 0.15rem;
+    }
+
+    .tile-text {
+      padding: 1.75rem 1.5rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    .tile-dark {
+      background: var(--bark);
+      color: var(--cream);
+    }
+
+    .tile-amber {
+      background: var(--amber);
+      color: var(--cream);
+    }
+
+    .tile-sand {
+      background: var(--sand);
+      color: var(--bark);
+    }
+
+    .tile-white {
+      background: white;
+      color: var(--bark);
+      box-shadow: 0 2px 16px rgba(74,44,23,0.06);
+      border: 1px solid rgba(74,44,23,0.05);
+    }
+
+    .tile-ocean {
+      background: var(--ocean);
+      color: var(--cream);
+    }
+
+    .tile-palm {
+      background: var(--palm);
+      color: var(--cream);
+    }
+
+    .tile-title {
+      font-family: 'Fredoka', sans-serif; font-weight: 600;
+      font-size: 1.3rem; line-height: 1.2; margin-bottom: 0.4rem;
+    }
+
+    .tile-label {
+      font-family: 'Caveat', cursive; font-size: 1rem; opacity: 0.75; margin-bottom: 0.2rem;
+    }
+
+    .tile-desc {
+      font-size: 0.85rem; line-height: 1.6; opacity: 0.85;
+    }
+
+    .tile-stat {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .tile-stat .stat-num {
+      font-family: 'Fredoka', sans-serif; font-weight: 700;
+      font-size: clamp(2.5rem, 8vw, 3.5rem); line-height: 1;
+    }
+
+    .tile-stat .stat-label {
+      font-family: 'Caveat', cursive; font-size: 1.1rem; opacity: 0.8; margin-top: 0.25rem;
+    }
+
+    /* span helpers */
+    @media (min-width: 640px) {
+      .span-2 { grid-column: span 2; }
+      .tile-photo.span-2 { min-height: 280px; }
+    }
+
+    @media (min-width: 900px) {
+      .span-2 { grid-column: span 2; }
+      .span-full { grid-column: 1 / -1; }
+    }
+
+    /* ─── FOOD FEATURE (full-bleed) ─── */
+    .food-feature {
+      position: relative;
+      min-height: 420px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .food-feature img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .food-feature:hover img { transform: scale(1.03); }
+
+    .food-feature .ff-overlay {
+      position: relative; z-index: 1; width: 100%;
+      padding: 3rem 1.5rem 2rem;
+      background: linear-gradient(transparent, rgba(42,26,10,0.9) 70%);
+    }
+
+    .food-feature .ff-overlay h2 {
+      font-family: 'Fredoka', sans-serif; font-weight: 700;
+      font-size: clamp(1.8rem, 6vw, 2.8rem); color: var(--cream); margin-bottom: 0.3rem;
+    }
+
+    .food-feature .ff-overlay p {
+      color: rgba(255,253,245,0.7); font-size: 0.95rem; max-width: 500px; line-height: 1.6;
+    }
+
+    .food-feature .ff-overlay .ff-price {
+      display: inline-block; margin-top: 0.75rem;
+      font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 1.3rem;
+      color: var(--amber-light);
+    }
+
+    .food-feature .ff-overlay .ff-tag {
+      display: inline-block; margin-left: 0.6rem;
+      padding: 0.2rem 0.7rem; background: var(--amber);
+      border-radius: 50px; font-size: 0.7rem; font-weight: 700;
+      color: var(--cream); text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    /* ─── SECTION DIVIDER ─── */
+    .section-divider {
+      text-align: center;
+      padding: 3.5rem 1.5rem 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .section-divider .sd-label {
+      font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--ocean);
+    }
+
+    .section-divider h2 {
+      font-family: 'Fredoka', sans-serif; font-weight: 700;
+      font-size: clamp(1.8rem, 6vw, 2.5rem); color: var(--bark); margin-top: 0.15rem;
+    }
+
+    .section-divider p {
+      margin-top: 0.5rem; font-size: 0.92rem; color: var(--bark-light); line-height: 1.6;
+    }
+
+    /* ─── MENU HIGHLIGHT CARDS ─── */
+    .menu-card {
+      display: flex; align-items: center; gap: 0.85rem;
+      padding: 1rem 1.1rem;
+    }
+
+    .menu-card-img {
+      width: 60px; height: 60px; border-radius: 12px; overflow: hidden; flex-shrink: 0;
+    }
+
+    .menu-card-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    .menu-card-emoji {
+      width: 60px; height: 60px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(212,135,14,0.1); font-size: 1.8rem;
+    }
+
+    .menu-card-info { flex: 1; min-width: 0; }
+    .menu-card-info h4 { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.92rem; color: var(--bark); }
+    .menu-card-info p { font-size: 0.75rem; color: var(--bark-light); margin-top: 0.1rem; }
+    .menu-card-price { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.95rem; color: var(--amber); white-space: nowrap; }
+    .menu-card-tag { font-family: 'Caveat', cursive; font-size: 0.7rem; color: var(--palm-light); margin-left: 0.25rem; }
+
+    /* ─── DRINK TILE ─── */
+    .drink-tile {
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    .drink-tile .dt-emoji { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    .drink-tile h4 { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 1rem; margin-bottom: 0.2rem; }
+    .drink-tile p { font-size: 0.75rem; opacity: 0.75; line-height: 1.4; }
+    .drink-tile .dt-price { font-family: 'Caveat', cursive; font-size: 1rem; font-weight: 700; margin-top: 0.4rem; display: block; }
+    .tile-white .dt-price { color: var(--ocean); }
+
+    /* ─── GROUP MEAL CARD ─── */
+    .group-tile {
+      padding: 1.5rem;
+    }
+
+    .group-tile-header {
+      display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;
+    }
+
+    .group-tile-set { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 1.15rem; }
+    .group-tile-persons {
+      font-family: 'Caveat', cursive; font-size: 0.85rem;
+      padding: 0.15rem 0.6rem; border-radius: 50px;
+      background: rgba(32,164,164,0.1); color: var(--ocean);
+    }
+
+    .group-tile-items { list-style: none; margin-bottom: 0.75rem; }
+    .group-tile-items li {
+      padding: 0.2rem 0; font-size: 0.82rem; color: var(--bark-light);
+      padding-left: 1rem; position: relative;
+    }
+    .group-tile-items li::before {
+      content: ''; position: absolute; left: 0; top: 50%; width: 5px; height: 5px;
+      background: var(--palm-light); border-radius: 50%; transform: translateY(-50%);
+    }
+
+    .group-tile-price { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 1.4rem; color: var(--amber); }
+
+    /* ─── CONTACT ROW ─── */
+    .contact-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .contact-tile {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.85rem 1rem;
+    }
+
+    .ct-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .ct-icon svg { width: 18px; height: 18px; }
+    .tile-sand .ct-icon { background: var(--bark); }
+    .tile-sand .ct-icon svg { fill: var(--cream); }
+
+    .ct-text .ct-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+    .ct-text .ct-value { font-weight: 700; font-size: 0.95rem; }
+    .ct-text a { color: inherit; text-decoration: none; }
+    .ct-text a:hover { color: var(--amber); }
+
+    /* ─── CTA BUTTON ─── */
+    .btn-amber {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.75rem 2rem; background: var(--amber); color: var(--cream);
+      text-decoration: none; font-family: 'Fredoka', sans-serif; font-weight: 600;
+      font-size: 0.9rem; border-radius: 50px; transition: all 0.3s;
+      box-shadow: 0 3px 14px rgba(212,135,14,0.3);
+    }
+    .btn-amber:hover { background: var(--amber-light); transform: translateY(-2px); }
+
+    .btn-palm {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.75rem 2rem; background: var(--palm); color: var(--cream);
+      text-decoration: none; font-family: 'Fredoka', sans-serif; font-weight: 600;
+      font-size: 0.9rem; border-radius: 50px; transition: all 0.3s;
+      box-shadow: 0 3px 14px rgba(61,139,55,0.25);
+    }
+    .btn-palm:hover { background: var(--palm-light); transform: translateY(-2px); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--night); text-align: center;
+      padding: 3rem 1.5rem 6rem;
+    }
+    @media (min-width: 641px) { footer { padding-bottom: 3rem; } }
+
+    .footer-logo { width: 55px; height: auto; margin-bottom: 0.75rem; opacity: 0.7; }
+    footer p { color: rgba(255,253,245,0.3); font-size: 0.75rem; }
+    footer .social-links { display: flex; justify-content: center; gap: 0.6rem; margin: 1rem 0; }
+    footer .social-links a {
+      width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+      background: rgba(255,253,245,0.06); border-radius: 50%; transition: all 0.3s;
+    }
+    footer .social-links a:hover { background: var(--amber); transform: scale(1.1); }
+    footer .social-links a svg { width: 16px; height: 16px; fill: rgba(255,253,245,0.7); }
+
+    /* ─── MARQUEE ─── */
+    .marquee-wrap { overflow: hidden; padding: 1rem 0; }
+    .marquee {
+      display: flex; gap: 1rem; animation: marquee 25s linear infinite; width: max-content;
+    }
+    .marquee span {
+      font-family: 'Fredoka', sans-serif; font-weight: 700;
+      font-size: clamp(1.8rem, 5vw, 3rem); color: rgba(255,253,245,0.06); white-space: nowrap;
+    }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ─── MOBILE STICKY CTA ─── */
+    .mobile-cta {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 998;
+      padding: 0.5rem 0.75rem; background: rgba(74,44,23,0.97);
+      backdrop-filter: blur(14px); box-shadow: 0 -2px 20px rgba(0,0,0,0.3);
+      opacity: 0; transform: translateY(100%); transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .mobile-cta.show { opacity: 1; transform: translateY(0); }
+    .mobile-cta-inner { display: flex; gap: 0.4rem; max-width: 500px; margin: 0 auto; }
+    .mobile-cta-inner a {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.35rem;
+      padding: 0.65rem 0.5rem; border-radius: 10px; text-decoration: none;
+      font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.82rem;
+    }
+    .mobile-cta-inner a svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .mcta-call { background: var(--palm); color: var(--cream); }
+    .mcta-call svg { fill: var(--cream); }
+    .mcta-menu { background: var(--amber); color: var(--cream); }
+    .mcta-menu svg { fill: var(--cream); }
+    @media (max-width: 640px) { .mobile-cta { display: block; } }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* back to top */
+    .back-to-top {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; width: 42px; height: 42px;
+      background: var(--amber); color: var(--cream); border: none; border-radius: 50%;
+      font-size: 1.1rem; cursor: pointer; box-shadow: 0 3px 14px rgba(212,135,14,0.35);
+      opacity: 0; transform: translateY(10px); transition: all 0.3s; z-index: 100;
+    }
+    .back-to-top.show { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { background: var(--amber-light); }
+    @media (max-width: 640px) { .back-to-top { bottom: 4.5rem; } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo"><img src="94733356_2951854864893730_1453364319617024000_n.jpg" alt="The Backyard Place"></a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="navLinks">
+    <a href="#story">About</a>
+    <a href="menu.html">Menu</a>
+    <a href="#drinks">Drinks</a>
+    <a href="#groups">Groups</a>
+    <a href="#visit">Visit</a>
+  </div>
+  <div class="nav-backdrop" id="navBackdrop"></div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="540511525_1292093842928202_8916532458938478924_n.jpg" alt="The Backyard Place interior">
+  </div>
+  <div class="hero-content">
+    <img src="94733356_2951854864893730_1453364319617024000_n.jpg" alt="The Backyard Place" class="hero-logo">
+    <p class="hero-tagline">Kalibo, Aklan's Favorite Spot</p>
+    <p class="hero-sub">EAT <span class="dot">•</span> GRILL <span class="dot">•</span> CHILL</p>
+    <div class="hero-actions">
+      <a href="menu.html" class="hero-cta">Explore Our Menu →</a>
+      <a href="tel:09511306264" class="hero-cta-secondary">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        Call to Reserve
+      </a>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="arrow"></div></div>
+</section>
+
+<div class="rustic-divider"><span class="rd-leaf">🌿</span></div>
+
+<!-- ═══════════ STORY BENTO ═══════════ -->
+<div class="bento-section" id="story">
+  <div class="bento-grid">
+
+    <!-- Intro text -->
+    <div class="bento-tile tile-text tile-sand span-2 reveal">
+      <p class="tile-label">Old Buswang, Kalibo, Aklan</p>
+      <h2 class="tile-title" style="font-size:clamp(1.5rem,5vw,2rem);">Where Every Night Feels Like a Fiesta</h2>
+      <p class="tile-desc" style="margin-top:0.5rem;">Located in the outskirts of the vibrant town of Kalibo, The Backyard Place has been serving good food and good times since 2016. Rattan lanterns, tropical greens, and flavors you won't forget.</p>
+    </div>
+
+    <!-- Since stat -->
+    <div class="bento-tile tile-text tile-dark tile-stat reveal">
+      <div class="stat-num">2016</div>
+      <div class="stat-label">Serving Good Vibes Since</div>
+    </div>
+
+    <!-- Venue photo: booth -->
+    <div class="bento-tile tile-photo reveal">
+      <img src="539803798_1292093662928220_8878371650793667154_n.jpg" alt="Tropical booth seating">
+      <div class="photo-label">
+        <h3>Cozy Corners</h3>
+        <p>Tropical leaf prints & rattan charm</p>
+      </div>
+    </div>
+
+    <!-- Feature: Grill -->
+    <div class="bento-tile tile-text tile-white reveal">
+      <p style="font-size:2rem;margin-bottom:0.5rem;">🔥</p>
+      <h3 class="tile-title" style="font-size:1.1rem;">Grill & Smoke</h3>
+      <p class="tile-desc">Signature grilled meats, fresh seafood, and sizzling platters straight from the flames.</p>
+    </div>
+
+    <!-- Feature: Cocktails -->
+    <div class="bento-tile tile-text tile-white reveal">
+      <p style="font-size:2rem;margin-bottom:0.5rem;">🍹</p>
+      <h3 class="tile-title" style="font-size:1.1rem;">Island Cocktails</h3>
+      <p class="tile-desc">Handcrafted cocktails, ice-cold beers, and tropical shakes to cool you down.</p>
+    </div>
+
+    <!-- Venue photo: lanterns -->
+    <div class="bento-tile tile-photo span-2 reveal" style="min-height:260px;">
+      <img src="540099496_1292093789594874_7068045398434497732_n.jpg" alt="Rattan lanterns and warm lighting">
+      <div class="photo-label">
+        <h3>Warm Amber Glow</h3>
+        <p>Handwoven rattan lanterns & fairy lights</p>
+      </div>
+    </div>
+
+    <!-- Feature: Vibes -->
+    <div class="bento-tile tile-text tile-amber reveal" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+      <p style="font-size:2rem;margin-bottom:0.5rem;">🌴</p>
+      <h3 class="tile-title" style="font-size:1.1rem;color:var(--cream);">Chill Vibes Only</h3>
+      <p class="tile-desc" style="color:rgba(255,253,245,0.85);">Family gatherings, barkada nights, or a quiet sunset dinner.</p>
+    </div>
+
+  </div>
+</div>
+
+<hr class="bamboo-hr">
+
+<!-- ═══════════ FOOD HERO: BAD BOY PLATTER ═══════════ -->
+<div class="food-feature reveal">
+  <img src="bad boy platter.jpg" alt="Bad Boy Platter — The Backyard Place signature platter">
+  <div class="ff-overlay">
+    <p class="tile-label" style="color:var(--amber-light);">Fan Favorite</p>
+    <h2>Bad Boy Platter</h2>
+    <p>Lechon kawali, grilled meats, dumplings, and all the sauces — the ultimate sharing board for the whole barkada.</p>
+    <span class="ff-price">₱1,399</span>
+    <span class="ff-tag">Best Seller</span>
+  </div>
+</div>
+
+<!-- ═══════════ MENU HIGHLIGHTS BENTO ═══════════ -->
+<div class="section-divider reveal">
+  <p class="sd-label">What's Cookin'</p>
+  <h2>Must-Try Dishes</h2>
+  <p>Can't decide? Here are the dishes our guests keep coming back for.</p>
+</div>
+
+<div class="bento-section" style="padding-top:1rem;">
+  <div class="bento-grid">
+
+    <!-- Sinigang photo -->
+    <div class="bento-tile tile-photo reveal" style="min-height:240px;">
+      <img src="sizzling pork sinigang.jpg" alt="Sizzling Pork Sinigang">
+      <div class="photo-label">
+        <h3>Sizzling Pork Sinigang</h3>
+        <p>A sizzling twist on a Filipino classic</p>
+      </div>
+    </div>
+
+    <!-- Menu items -->
+    <div class="bento-tile tile-white menu-card reveal">
+      <div class="menu-card-emoji">🐟</div>
+      <div class="menu-card-info">
+        <h4>Seafood Platter <span class="menu-card-tag">best seller</span></h4>
+        <p>Fresh catch, grilled to perfection</p>
+      </div>
+      <span class="menu-card-price">₱1,299</span>
+    </div>
+
+    <div class="bento-tile tile-white menu-card reveal">
+      <div class="menu-card-emoji">🍖</div>
+      <div class="menu-card-info">
+        <h4>Signature Ribs</h4>
+        <p>Fall-off-the-bone, our chef's pride</p>
+      </div>
+      <span class="menu-card-price">Chef's Cut</span>
+    </div>
+
+    <div class="bento-tile tile-white menu-card reveal">
+      <div class="menu-card-emoji">🍜</div>
+      <div class="menu-card-info">
+        <h4>Seafood Canton <span class="menu-card-tag">popular</span></h4>
+        <p>Crispy noodles loaded with seafood</p>
+      </div>
+      <span class="menu-card-price">₱399</span>
+    </div>
+
+    <div class="bento-tile tile-white menu-card reveal">
+      <div class="menu-card-emoji">🔥</div>
+      <div class="menu-card-info">
+        <h4>Pork Sisig</h4>
+        <p>Sizzling, crispy, and packed with flavor</p>
+      </div>
+      <span class="menu-card-price">₱159</span>
+    </div>
+
+    <div class="bento-tile tile-white menu-card reveal">
+      <div class="menu-card-emoji">🧊</div>
+      <div class="menu-card-info">
+        <h4>Special Halo-Halo <span class="menu-card-tag">must try</span></h4>
+        <p>Our own take on the Pinoy classic</p>
+      </div>
+      <span class="menu-card-price">₱179</span>
+    </div>
+
+    <!-- CTA tile -->
+    <div class="bento-tile tile-text tile-dark reveal" style="text-align:center;justify-content:center;align-items:center;padding:2rem;">
+      <p class="tile-label" style="color:var(--amber-light);">60+ dishes to explore</p>
+      <h3 class="tile-title" style="color:var(--cream);margin-bottom:0.75rem;">See Full Menu</h3>
+      <a href="menu.html" class="btn-amber">View Menu →</a>
+    </div>
+
+  </div>
+</div>
+
+<div class="rustic-divider"><span class="rd-leaf">🍃</span></div>
+
+<!-- ═══════════ DRINKS ═══════════ -->
+<div class="section-divider reveal" id="drinks">
+  <p class="sd-label">Cheers!</p>
+  <h2>Tropical Sips</h2>
+</div>
+
+<div class="bento-section" style="padding-top:1rem;">
+  <div class="bento-grid" style="grid-template-columns: repeat(2, 1fr);">
+    <div class="bento-tile tile-white drink-tile reveal">
+      <div class="dt-emoji">🍹</div>
+      <h4>Cocktails</h4>
+      <p>Mojito, Margarita, Pinacolada & more</p>
+      <span class="dt-price">from ₱139</span>
+    </div>
+    <div class="bento-tile tile-white drink-tile reveal">
+      <div class="dt-emoji">🥭</div>
+      <h4>Fruit Shakes</h4>
+      <p>Mango, Buko, Dragon Fruit & seasonal picks</p>
+      <span class="dt-price">from ₱129</span>
+    </div>
+    <div class="bento-tile tile-white drink-tile reveal">
+      <div class="dt-emoji">🍋</div>
+      <h4>Fresh Juices</h4>
+      <p>Calamansi, Watermelon, Mango & more</p>
+      <span class="dt-price">from ₱75</span>
+    </div>
+    <div class="bento-tile tile-white drink-tile reveal">
+      <div class="dt-emoji">🧊</div>
+      <h4>Cold Drinks</h4>
+      <p>Lemonade, Iced Tea, Sodas & Water</p>
+      <span class="dt-price">from ₱35</span>
+    </div>
+  </div>
+</div>
+
+<div class="rustic-divider"><span class="rd-leaf">🌴</span></div>
+
+<!-- ═══════════ GROUP MEALS ═══════════ -->
+<div class="section-divider reveal" id="groups">
+  <p class="sd-label">Squad Goals</p>
+  <h2>Group Meals</h2>
+  <p>Bring the whole barkada! Feast together without breaking the bank.</p>
+</div>
+
+<div class="bento-section" style="padding-top:1rem;">
+  <div class="bento-grid" style="grid-template-columns: repeat(2, 1fr);">
+
+    <div class="bento-tile tile-white rope-border group-tile reveal">
+      <div class="group-tile-header">
+        <span class="group-tile-set">Set 1</span>
+        <span class="group-tile-persons">4-5 pax</span>
+      </div>
+      <ul class="group-tile-items">
+        <li>Whole Chicken Royale</li>
+        <li>Seafood Pancit Canton</li>
+        <li>Sweet & Sour Porkchop</li>
+        <li>Plain Rice & Iced Tea</li>
+      </ul>
+      <span class="group-tile-price">₱1,449</span>
+    </div>
+
+    <div class="bento-tile tile-white rope-border group-tile reveal">
+      <div class="group-tile-header">
+        <span class="group-tile-set">Set 2</span>
+        <span class="group-tile-persons">6-7 pax</span>
+      </div>
+      <ul class="group-tile-items">
+        <li>Signature Ribs</li>
+        <li>Crispy Pancit Canton</li>
+        <li>Whole Chicken Royale</li>
+        <li>Lumpia Shanghai & Rice</li>
+      </ul>
+      <span class="group-tile-price">₱2,299</span>
+    </div>
+
+    <div class="bento-tile tile-white rope-border group-tile reveal">
+      <div class="group-tile-header">
+        <span class="group-tile-set">Set 3</span>
+        <span class="group-tile-persons">10-15 pax</span>
+      </div>
+      <ul class="group-tile-items">
+        <li>2 Beef Kansi & 2 Pork Sisig</li>
+        <li>2 Crispy Fried Chicken</li>
+        <li>2 Paco Fern Salad & 2 Calamares</li>
+        <li>2 Crispy Pata & 2 Platter Rice</li>
+      </ul>
+      <span class="group-tile-price">₱6,399</span>
+    </div>
+
+    <div class="bento-tile tile-white rope-border group-tile reveal">
+      <div class="group-tile-header">
+        <span class="group-tile-set">Set 4</span>
+        <span class="group-tile-persons">9-10 pax</span>
+      </div>
+      <ul class="group-tile-items">
+        <li>Seafood Platter</li>
+        <li>All Meat Platter</li>
+        <li>2 Paco Fern Salad</li>
+        <li>2 Steamed Talaba & Rice</li>
+      </ul>
+      <span class="group-tile-price">₱3,599</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════ THE EXPERIENCE ═══════════ -->
+<div style="background:var(--bark);margin-top:2rem;">
+
+  <div class="marquee-wrap">
+    <div class="marquee">
+      <span>EAT • GRILL • CHILL • REPEAT •&nbsp;</span>
+      <span>EAT • GRILL • CHILL • REPEAT •&nbsp;</span>
+      <span>EAT • GRILL • CHILL • REPEAT •&nbsp;</span>
+      <span>EAT • GRILL • CHILL • REPEAT •&nbsp;</span>
+    </div>
+  </div>
+
+  <div class="bento-section">
+    <div class="section-divider reveal" style="padding-top:0;">
+      <p class="sd-label" style="color:var(--amber-light);">The Experience</p>
+      <h2 style="color:var(--cream);">More Than Just Food</h2>
+    </div>
+
+    <div class="bento-grid" style="margin-top:1.5rem;">
+
+      <div class="bento-tile tile-photo span-2 reveal" style="min-height:280px;">
+        <img src="540511525_1292093842928202_8916532458938478924_n.jpg" alt="Open air dining">
+        <div class="photo-label">
+          <h3>Open Air Dining</h3>
+          <p>Surrounded by nature, lit by fairy lights</p>
+        </div>
+      </div>
+
+      <div class="bento-tile tile-text tile-amber reveal" style="text-align:center;justify-content:center;align-items:center;">
+        <span style="font-size:2.2rem;">🎶</span>
+        <h4 class="tile-title" style="font-size:1rem;color:var(--cream);margin-top:0.5rem;">Live Music Nights</h4>
+        <p class="tile-desc" style="color:rgba(255,253,245,0.8);">Acoustic jams & good vibes</p>
+      </div>
+
+      <div class="bento-tile tile-text tile-white reveal" style="text-align:center;">
+        <span style="font-size:2.2rem;">👨‍👩‍👧‍👦</span>
+        <h4 class="tile-title" style="font-size:1rem;margin-top:0.5rem;">Family Friendly</h4>
+        <p class="tile-desc">Open spaces the kids will love</p>
+      </div>
+
+      <div class="bento-tile tile-text tile-white reveal" style="text-align:center;">
+        <span style="font-size:2.2rem;">🌅</span>
+        <h4 class="tile-title" style="font-size:1rem;margin-top:0.5rem;">Sunset Dining</h4>
+        <p class="tile-desc">Golden hour hits different here</p>
+      </div>
+
+      <div class="bento-tile tile-text tile-ocean reveal" style="text-align:center;justify-content:center;align-items:center;">
+        <span style="font-size:2.2rem;">🎉</span>
+        <h4 class="tile-title" style="font-size:1rem;color:var(--cream);margin-top:0.5rem;">Events & Parties</h4>
+        <p class="tile-desc" style="color:rgba(255,253,245,0.8);">Birthdays, reunions, celebrations</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="marquee-wrap" style="padding-bottom:2rem;">
+    <div class="marquee" style="animation-direction:reverse;">
+      <span>KALIBO • AKLAN • SINCE 2016 •&nbsp;</span>
+      <span>KALIBO • AKLAN • SINCE 2016 •&nbsp;</span>
+      <span>KALIBO • AKLAN • SINCE 2016 •&nbsp;</span>
+      <span>KALIBO • AKLAN • SINCE 2016 •&nbsp;</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="rustic-divider"><span class="rd-leaf">🌿</span></div>
+
+<!-- ═══════════ VISIT US ═══════════ -->
+<div class="section-divider reveal" id="visit">
+  <p class="sd-label">Come Hang</p>
+  <h2>Visit The Backyard</h2>
+</div>
+
+<div class="bento-section" style="padding-top:1rem;">
+  <div class="bento-grid">
+
+    <!-- Photo -->
+    <div class="bento-tile tile-photo span-2 reveal" style="min-height:260px;">
+      <img src="539803798_1292093662928220_8878371650793667154_n.jpg" alt="Tropical booth seating">
+      <div class="photo-label">
+        <h3>Your Table is Waiting</h3>
+        <p>Walk in or call ahead to reserve</p>
+      </div>
+    </div>
+
+    <!-- Contact info -->
+    <div class="bento-tile tile-text tile-sand reveal">
+      <img src="94733356_2951854864893730_1453364319617024000_n.jpg" alt="The Backyard Place" style="width:70px;height:auto;margin-bottom:0.75rem;">
+      <p class="tile-label" style="color:var(--ocean);">Eat • Grill • Chill since 2016</p>
+
+      <div class="contact-grid" style="margin-top:1rem;">
+        <div class="contact-tile" style="padding:0.5rem 0;">
+          <div class="ct-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </div>
+          <div class="ct-text">
+            <div class="ct-label">Location</div>
+            <div class="ct-value">Old Buswang, Kalibo, Aklan</div>
+          </div>
+        </div>
+        <div class="contact-tile" style="padding:0.5rem 0;">
+          <div class="ct-icon">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          </div>
+          <div class="ct-text">
+            <div class="ct-label">Call or Text</div>
+            <div class="ct-value"><a href="tel:09511306264">0951 130 6264</a></div>
+          </div>
+        </div>
+        <div class="contact-tile" style="padding:0.5rem 0;">
+          <div class="ct-icon">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+          </div>
+          <div class="ct-text">
+            <div class="ct-label">Open Daily</div>
+            <div class="ct-value">10:00 AM — 12:00 MN</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:1.25rem;">
+        <a href="tel:09511306264" class="btn-palm" style="width:100%;justify-content:center;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          Call Now
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <img src="94733356_2951854864893730_1453364319617024000_n.jpg" alt="The Backyard Place" class="footer-logo">
+  <div class="social-links">
+    <a href="https://www.facebook.com/backyardkalibo" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+    <a href="#" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <a href="#" aria-label="TikTok">
+      <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+    </a>
+  </div>
+  <p>Old Buswang, Kalibo, Aklan &nbsp;|&nbsp; 0951 130 6264</p>
+  <p style="margin-top:0.5rem;">&copy; 2026 The Backyard Place. All rights reserved.</p>
+</footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="mobile-cta" id="mobileCta">
+  <div class="mobile-cta-inner">
+    <a href="tel:09511306264" class="mcta-call">
+      <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      Call Now
+    </a>
+    <a href="menu.html" class="mcta-menu">
+      <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+      View Menu
+    </a>
+  </div>
+</div>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+<script>
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  const backdrop = document.getElementById('navBackdrop');
+  function closeMobileMenu() { toggle.classList.remove('active'); links.classList.remove('open'); backdrop.classList.remove('show'); }
+  toggle.addEventListener('click', () => {
+    if (links.classList.contains('open')) { closeMobileMenu(); }
+    else { toggle.classList.add('active'); links.classList.add('open'); backdrop.classList.add('show'); }
+  });
+  backdrop.addEventListener('click', closeMobileMenu);
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const mobileCta = document.getElementById('mobileCta');
+  const btt = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    mobileCta.classList.toggle('show', window.scrollY > 400);
+    btt.classList.toggle('show', window.scrollY > 600);
+  });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+</body>
+</html>
