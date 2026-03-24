@@ -251,14 +251,15 @@
       opacity: 0.4;
     }
 
-    /* Wave divider */
-    .wave-divider {
+    /* Torn paper divider */
+    .torn-divider {
       width: 100%;
       overflow: hidden;
       line-height: 0;
       display: block;
+      position: relative;
     }
-    .wave-divider svg { display: block; width: 100%; }
+    .torn-divider svg { display: block; width: 100%; }
 
     /* =============================================
        MARQUEE
@@ -1506,20 +1507,26 @@
       letter-spacing: 0.05em;
     }
     .watermark-dark {
-      -webkit-text-stroke: 1.5px rgba(21,16,10,0.04);
+      -webkit-text-stroke: 2px rgba(61,43,31,0.08);
     }
 
-    /* Stamp badge */
+    /* Stamp badge — positioned right side of hero */
     .stamp-badge {
-      display: inline-flex;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-12deg);
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 90px;
-      height: 90px;
-      border: 2px dashed var(--amber);
+      width: 120px;
+      height: 120px;
+      border: 3px dashed rgba(245,183,49,0.6);
       border-radius: 50%;
-      transform: rotate(-12deg);
-      position: relative;
+      z-index: 3;
+      background: rgba(21,16,10,0.25);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 30px rgba(245,183,49,0.1);
     }
     .stamp-badge-inner {
       text-align: center;
@@ -1528,28 +1535,51 @@
     .stamp-badge-year {
       font-family: 'Rubik', sans-serif;
       font-weight: 800;
-      font-size: 1.5rem;
+      font-size: 2.2rem;
       color: var(--amber-glow);
       display: block;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     .stamp-badge-text {
-      font-family: 'Caveat', cursive;
-      font-size: 0.7rem;
+      font-family: 'Rubik', sans-serif;
+      font-size: 0.75rem;
       font-weight: 700;
-      color: var(--amber);
+      color: var(--cream);
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.15em;
       display: block;
     }
     .stamp-badge-city {
       font-family: 'Nunito', sans-serif;
-      font-size: 0.55rem;
+      font-size: 0.6rem;
       font-weight: 700;
-      color: rgba(255,248,240,0.4);
+      color: rgba(255,248,240,0.55);
       text-transform: uppercase;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
       display: block;
-      margin-top: 2px;
+      margin-top: 3px;
+    }
+    @media (min-width: 640px) {
+      .stamp-badge {
+        width: 140px;
+        height: 140px;
+        right: 28px;
+        border-width: 3px;
+      }
+      .stamp-badge-year { font-size: 2.6rem; }
+      .stamp-badge-text { font-size: 0.8rem; }
+      .stamp-badge-city { font-size: 0.65rem; }
+    }
+    @media (min-width: 900px) {
+      .stamp-badge {
+        width: 160px;
+        height: 160px;
+        right: 60px;
+      }
+      .stamp-badge-year { font-size: 3rem; }
+      .stamp-badge-text { font-size: 0.85rem; }
+      .stamp-badge-city { font-size: 0.7rem; }
     }
 
     /* Feature tag with stripe pattern (Famous Dave's inspired) */
@@ -1636,14 +1666,6 @@
         loading="eager"
       >
 
-      <div class="stamp-badge" style="margin: -4px 0;">
-        <div class="stamp-badge-inner">
-          <span class="stamp-badge-text">Est.</span>
-          <span class="stamp-badge-year">2016</span>
-          <span class="stamp-badge-city">Kalibo, Aklan</span>
-        </div>
-      </div>
-
       <div class="hero-pill">Fresh Seafood. Live Grill. Cold Drinks.</div>
 
       <h1 class="hero-h1">Kalibo's Favorite<br><span class="text-outline">Seafood Grill Bar</span></h1>
@@ -1657,6 +1679,14 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.09-1.09a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           Call to Reserve
         </a>
+      </div>
+    </div>
+
+    <div class="stamp-badge">
+      <div class="stamp-badge-inner">
+        <span class="stamp-badge-text">Est.</span>
+        <span class="stamp-badge-year">2016</span>
+        <span class="stamp-badge-city">Kalibo, Aklan</span>
       </div>
     </div>
 
@@ -1785,10 +1815,10 @@
     </div>
   </section>
 
-  <!-- Wave divider -->
-  <div class="wave-divider" aria-hidden="true">
-    <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0 24C180 8 360 40 540 24C720 8 900 40 1080 24C1260 8 1380 36 1440 28V48H0V24Z" fill="#15100A"/>
+  <!-- Torn paper divider (cream → dark) -->
+  <div class="torn-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;">
+      <path d="M0 32 Q20 18 48 28 T96 22 T150 30 T200 20 T260 32 T320 24 T380 34 T440 20 T500 28 T560 18 T620 30 T680 22 T740 34 T800 24 T860 30 T920 20 T980 32 T1040 22 T1100 28 T1160 20 T1220 32 T1280 24 T1340 30 T1400 22 L1440 26 V60 H0 Z" fill="#15100A"/>
     </svg>
   </div>
 
@@ -1912,10 +1942,10 @@
     </div>
   </section>
 
-  <!-- Wave divider (inverted) -->
-  <div class="wave-divider" aria-hidden="true">
-    <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0 28C60 36 180 8 360 24C540 40 720 8 900 24C1080 40 1260 12 1440 24V0H0V28Z" fill="#15100A"/>
+  <!-- Torn paper divider (dark → sand, inverted) -->
+  <div class="torn-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;">
+      <path d="M0 28 Q30 14 60 24 T120 18 T180 26 T240 16 T300 28 T360 20 T420 30 T480 18 T540 26 T600 14 T660 24 T720 18 T780 28 T840 20 T900 26 T960 16 T1020 28 T1080 18 T1140 26 T1200 16 T1260 24 T1320 18 T1380 28 L1440 22 V0 H0 Z" fill="#15100A"/>
     </svg>
   </div>
 
@@ -2082,10 +2112,10 @@
     </div>
   </section>
 
-  <!-- Wave divider -->
-  <div class="wave-divider" aria-hidden="true">
-    <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0 24C180 8 360 40 540 24C720 8 900 40 1080 24C1260 8 1380 36 1440 28V48H0V24Z" fill="#3D2B1F"/>
+  <!-- Torn paper divider (bark → cream) -->
+  <div class="torn-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;">
+      <path d="M0 30 Q24 16 52 26 T108 20 T168 30 T224 18 T284 28 T344 22 T404 32 T464 18 T524 26 T584 16 T644 28 T704 20 T764 32 T824 22 T884 28 T944 18 T1004 30 T1064 20 T1124 26 T1184 18 T1244 30 T1304 22 T1364 28 L1440 24 V60 H0 Z" fill="#FFF8F0"/>
     </svg>
   </div>
 
