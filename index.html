@@ -1508,23 +1508,27 @@
       -webkit-text-stroke: 2px rgba(61,43,31,0.08);
     }
 
-    /* Stamp badge — positioned right side of hero */
+    /* Stamp badge — anchored to hero logo like a seal */
+    .hero-logo-wrap {
+      position: relative;
+      display: inline-block;
+    }
     .stamp-badge {
       position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%) rotate(-12deg);
+      bottom: -18px;
+      right: -22px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 120px;
-      height: 120px;
-      border: 3px dashed rgba(245,183,49,0.6);
+      width: 80px;
+      height: 80px;
+      border: 2.5px dashed rgba(245,183,49,0.7);
       border-radius: 50%;
       z-index: 3;
-      background: rgba(21,16,10,0.25);
-      backdrop-filter: blur(4px);
-      box-shadow: 0 0 30px rgba(245,183,49,0.1);
+      background: rgba(21,16,10,0.55);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 20px rgba(245,183,49,0.15);
+      transform: rotate(-12deg);
     }
     .stamp-badge-inner {
       text-align: center;
@@ -1560,24 +1564,25 @@
     }
     @media (min-width: 640px) {
       .stamp-badge {
-        width: 140px;
-        height: 140px;
-        right: 28px;
-        border-width: 3px;
+        width: 95px;
+        height: 95px;
+        bottom: -20px;
+        right: -28px;
       }
-      .stamp-badge-year { font-size: 2.6rem; }
-      .stamp-badge-text { font-size: 0.8rem; }
-      .stamp-badge-city { font-size: 0.65rem; }
+      .stamp-badge-year { font-size: 2rem; }
+      .stamp-badge-text { font-size: 0.7rem; }
+      .stamp-badge-city { font-size: 0.58rem; }
     }
     @media (min-width: 900px) {
       .stamp-badge {
-        width: 160px;
-        height: 160px;
-        right: 60px;
+        width: 110px;
+        height: 110px;
+        bottom: -24px;
+        right: -32px;
       }
-      .stamp-badge-year { font-size: 3rem; }
-      .stamp-badge-text { font-size: 0.85rem; }
-      .stamp-badge-city { font-size: 0.7rem; }
+      .stamp-badge-year { font-size: 2.3rem; }
+      .stamp-badge-text { font-size: 0.75rem; }
+      .stamp-badge-city { font-size: 0.62rem; }
     }
 
     /* Feature tag with stripe pattern (Famous Dave's inspired) */
@@ -1657,12 +1662,21 @@
     <div class="hero-bg" role="img" aria-label="The Backyard Place dining area"></div>
 
     <div class="hero-content">
-      <img
-        src="logo.jpeg"
-        alt="The Backyard Place"
-        class="hero-logo"
-        loading="eager"
-      >
+      <div class="hero-logo-wrap">
+        <img
+          src="logo.jpeg"
+          alt="The Backyard Place"
+          class="hero-logo"
+          loading="eager"
+        >
+        <div class="stamp-badge">
+          <div class="stamp-badge-inner">
+            <span class="stamp-badge-text">Est.</span>
+            <span class="stamp-badge-year">2016</span>
+            <span class="stamp-badge-city">Kalibo, Aklan</span>
+          </div>
+        </div>
+      </div>
 
       <div class="hero-pill">Fresh Seafood. Live Grill. Cold Drinks.</div>
 
@@ -1677,14 +1691,6 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.09-1.09a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           Call to Reserve
         </a>
-      </div>
-    </div>
-
-    <div class="stamp-badge">
-      <div class="stamp-badge-inner">
-        <span class="stamp-badge-text">Est.</span>
-        <span class="stamp-badge-year">2016</span>
-        <span class="stamp-badge-city">Kalibo, Aklan</span>
       </div>
     </div>
 
@@ -1745,7 +1751,7 @@
         <!-- Tile 2: Stat -->
         <div class="tile tile-bark tile-stat reveal reveal-delay-2" role="listitem">
           <div class="tile-content" style="align-items:center; justify-content:center; text-align:center;">
-            <div class="stat-number">7+</div>
+            <div class="stat-number">10</div>
             <div class="stat-label">Years of Good Vibes</div>
           </div>
         </div>
