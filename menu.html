@@ -4,26 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu — The Backyard Place | Kalibo, Aklan</title>
-  <meta name="description" content="Full menu of The Backyard Place in Kalibo, Aklan. Signature platters, seafood, Filipino favorites, cocktails, and more.">
+  <meta name="description" content="Full menu of The Backyard Place — tropical seafood grill bar in Kalibo, Aklan. Fresh talaba, grilled fish, seafood platters, Filipino favorites, cocktails, and more.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@500;700&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Caveat:wght@500;700&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bark: #4A2C17;
-      --bark-light: #6B4226;
-      --cream: #FFFDF5;
-      --sand: #FFF3DC;
-      --palm: #3D8B37;
-      --palm-light: #5CB356;
-      --ocean: #20A4A4;
-      --ocean-light: #3CC8C8;
-      --sunset: #D4870E;
-      --sunset-glow: #E8960A;
+      --bark: #3D2B1F;
+      --bark-light: #5C4033;
+      --cream: #FFF8F0;
+      --sand: #FFF0D6;
+      --ocean: #0E7C7B;
+      --ocean-light: #17A2A1;
       --amber: #D4870E;
-      --amber-light: #F0A81C;
-      --coral: #E86A3A;
-      --night: #2A1A0A;
+      --amber-light: #E89F1C;
+      --coral: #E8623A;
+      --night: #15100A;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -55,7 +51,7 @@
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(ellipse at 10% 10%, rgba(61, 139, 55, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 10% 10%, rgba(14, 124, 123, 0.08) 0%, transparent 50%),
         radial-gradient(ellipse at 90% 90%, rgba(212, 135, 14, 0.06) 0%, transparent 50%),
         radial-gradient(ellipse at 50% 50%, rgba(212, 135, 14, 0.04) 0%, transparent 60%);
     }
@@ -71,7 +67,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(74, 44, 23, 0.95);
+      background: rgba(61, 43, 31, 0.95);
       backdrop-filter: blur(12px);
       box-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
@@ -139,7 +135,7 @@
         right: -100%;
         width: 70%;
         height: 100vh;
-        background: rgba(74, 44, 23, 0.97);
+        background: rgba(61, 43, 31, 0.97);
         backdrop-filter: blur(20px);
         flex-direction: column;
         justify-content: center;
@@ -163,12 +159,12 @@
     .menu-hero-label {
       font-family: 'Caveat', cursive;
       font-size: 1.1rem;
-      color: var(--sunset-glow);
+      color: var(--amber-light);
       margin-bottom: 0.25rem;
     }
 
     .menu-hero-title {
-      font-family: 'Fredoka', sans-serif; font-weight: 600;
+      font-family: 'Rubik', sans-serif; font-weight: 600;
       font-size: clamp(2.5rem, 10vw, 4.5rem);
       color: var(--cream);
       line-height: 1;
@@ -189,7 +185,7 @@
       position: sticky;
       top: 52px;
       z-index: 100;
-      background: rgba(74, 44, 23, 0.92);
+      background: rgba(61, 43, 31, 0.92);
       backdrop-filter: blur(14px);
       padding: 0.75rem 1rem;
       overflow-x: auto;
@@ -219,8 +215,8 @@
 
     .cat-tab:hover,
     .cat-tab.active {
-      background: var(--sunset);
-      border-color: var(--sunset);
+      background: var(--amber);
+      border-color: var(--amber);
     }
 
     /* ── MENU SECTIONS ── */
@@ -251,7 +247,7 @@
     }
 
     .cat-title {
-      font-family: 'Fredoka', sans-serif; font-weight: 600;
+      font-family: 'Rubik', sans-serif; font-weight: 600;
       font-size: 1.5rem;
       color: var(--cream);
     }
@@ -259,7 +255,7 @@
     .cat-count {
       font-family: 'Caveat', cursive;
       font-size: 0.85rem;
-      color: var(--sunset-glow);
+      color: var(--amber-light);
       margin-left: auto;
     }
 
@@ -297,12 +293,12 @@
     .menu-item-tag {
       font-family: 'Caveat', cursive;
       font-size: 0.72rem;
-      color: var(--palm-light);
+      color: var(--ocean-light);
       margin-left: 0.35rem;
     }
 
     .menu-item-price {
-      color: var(--sunset-glow);
+      color: var(--amber-light);
       font-weight: 600;
       font-size: 0.88rem;
       white-space: nowrap;
@@ -329,7 +325,7 @@
       padding: 0.2rem 0.6rem;
       background: rgba(212, 135, 14, 0.12);
       border: 1px solid rgba(212, 135, 14, 0.2);
-      color: var(--sunset-glow);
+      color: var(--amber-light);
       font-size: 0.68rem;
       border-radius: 50px;
       font-weight: 500;
@@ -337,8 +333,8 @@
 
     /* ── STUDENT MEALS CALLOUT ── */
     .student-callout {
-      background: rgba(61, 139, 55, 0.1);
-      border: 1px solid rgba(61, 139, 55, 0.2);
+      background: rgba(14, 124, 123, 0.1);
+      border: 1px solid rgba(14, 124, 123, 0.2);
       border-radius: 12px;
       padding: 0.85rem 1rem;
       margin-bottom: 1rem;
@@ -346,7 +342,7 @@
       align-items: center;
       gap: 0.6rem;
       font-size: 0.82rem;
-      color: var(--palm-light);
+      color: var(--ocean-light);
     }
 
     /* ── CTA BANNER ── */
@@ -360,7 +356,7 @@
     .menu-cta p {
       font-family: 'Caveat', cursive;
       font-size: 1.15rem;
-      color: var(--sunset-glow);
+      color: var(--amber-light);
       margin-bottom: 0.75rem;
     }
 
@@ -369,10 +365,10 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.85rem 2.5rem;
-      background: var(--sunset);
+      background: var(--amber);
       color: var(--cream);
       text-decoration: none;
-      font-family: 'Fredoka', sans-serif; font-weight: 600;
+      font-family: 'Rubik', sans-serif; font-weight: 600;
       font-size: 1rem;
       border-radius: 50px;
       box-shadow: 0 4px 20px rgba(212, 135, 14, 0.3);
@@ -380,7 +376,7 @@
     }
 
     .menu-cta a:hover {
-      background: var(--sunset-glow);
+      background: var(--amber-light);
       transform: translateY(-2px);
     }
 
@@ -392,7 +388,7 @@
     }
 
     footer .footer-logo {
-      font-family: 'Fredoka', sans-serif; font-weight: 600;
+      font-family: 'Rubik', sans-serif; font-weight: 600;
       font-size: 1.2rem;
       color: var(--cream);
       margin-bottom: 0.5rem;
@@ -421,7 +417,7 @@
       right: 1.5rem;
       width: 44px;
       height: 44px;
-      background: var(--sunset);
+      background: var(--amber);
       color: var(--cream);
       border: none;
       border-radius: 50%;
@@ -434,7 +430,7 @@
       z-index: 100;
     }
     .back-to-top.show { opacity: 1; transform: translateY(0); }
-    .back-to-top:hover { background: var(--sunset-glow); transform: scale(1.1); }
+    .back-to-top:hover { background: var(--amber-light); transform: scale(1.1); }
   </style>
 </head>
 <body>
