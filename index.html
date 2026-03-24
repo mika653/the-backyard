@@ -115,10 +115,11 @@
     }
 
     .nav-logo {
-      height: 44px;
+      height: 40px;
       width: auto;
       object-fit: contain;
       display: block;
+      border-radius: 4px;
     }
 
     .nav-logo-wrap {
@@ -345,13 +346,11 @@
     }
 
     .hero-logo {
-      width: 110px;
-      height: 110px;
+      width: clamp(180px, 40vw, 280px);
+      height: auto;
       object-fit: contain;
-      border-radius: 50%;
-      border: 3px solid rgba(245, 183, 49, 0.5);
-      box-shadow: 0 0 32px rgba(245, 183, 49, 0.2);
-      background: rgba(21, 16, 10, 0.4);
+      border-radius: 12px;
+      filter: drop-shadow(0 4px 20px rgba(0,0,0,0.4));
     }
 
     .hero-pill {
@@ -1056,12 +1055,11 @@
       border: 1px solid rgba(61,43,31,0.1);
     }
     .visit-card-logo {
-      width: 64px;
-      height: 64px;
+      width: 120px;
+      height: auto;
       object-fit: contain;
-      border-radius: 50%;
+      border-radius: 8px;
       margin-bottom: 16px;
-      border: 2px solid rgba(212,135,14,0.3);
     }
     .visit-card h3 {
       font-family: 'Rubik', sans-serif;
@@ -1146,11 +1144,11 @@
     }
 
     .footer-logo {
-      width: 72px;
-      height: 72px;
+      width: 100px;
+      height: auto;
       object-fit: contain;
-      border-radius: 50%;
-      border: 2px solid rgba(212, 135, 14, 0.3);
+      border-radius: 8px;
+      opacity: 0.85;
     }
 
     .footer-tagline {
@@ -1618,12 +1616,12 @@
   <nav id="nav" role="navigation" aria-label="Main navigation">
     <a href="#hero" class="nav-logo-wrap" aria-label="The Backyard Place home">
       <img
-        src="94733356_2951854864893730_1453364319617024000_n.jpg"
+        src="logo.jpeg"
         alt="The Backyard Place logo"
         class="nav-logo"
         loading="eager"
       >
-      <span>The Backyard<br>Place</span>
+      <!-- Logo already contains the name -->
     </a>
 
     <ul class="nav-links" role="list">
@@ -1660,7 +1658,7 @@
 
     <div class="hero-content">
       <img
-        src="94733356_2951854864893730_1453364319617024000_n.jpg"
+        src="logo.jpeg"
         alt="The Backyard Place"
         class="hero-logo"
         loading="eager"
@@ -2149,7 +2147,7 @@
         <!-- Contact card -->
         <div class="visit-card reveal reveal-delay-2">
           <img
-            src="94733356_2951854864893730_1453364319617024000_n.jpg"
+            src="logo.jpeg"
             alt="The Backyard Place logo"
             class="visit-card-logo"
             loading="lazy"
@@ -2222,7 +2220,7 @@
 
       <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
         <img
-          src="94733356_2951854864893730_1453364319617024000_n.jpg"
+          src="logo.jpeg"
           alt="The Backyard Place"
           class="footer-logo"
           loading="lazy"
