@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Backyard Place — Fresh Seafood & Good Vibes | Kalibo, Aklan</title>
+  <meta name="description" content="The Backyard Place — Kalibo's favorite seafood grill bar. Fresh talaba, grilled fish, sizzling platters, and cold drinks since 2016.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --seafoam: #F0FDFA;
+      --teal: #0D9488;
+      --teal-light: #5EEAD4;
+      --teal-deep: #134E4A;
+      --ocean: #0F2B29;
+      --amber: #F59E0B;
+      --amber-light: #FCD34D;
+      --coral: #EA580C;
+      --glass: rgba(255,255,255,0.65);
+      --glass-border: rgba(13,148,136,0.15);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Nunito Sans',sans-serif; background:var(--seafoam); color:var(--teal-deep); overflow-x:hidden; }
+    img { display:block; width:100%; height:100%; object-fit:cover; }
+    a { text-decoration:none; color:inherit; }
+    h1,h2,h3,h4 { font-family:'Quicksand',sans-serif; line-height:1.2; }
+
+    .fade-in { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+    .caveat { font-family:'Caveat',cursive; }
+
+    /* NAV */
+    #nav {
+      position:fixed; top:0; left:0; right:0; z-index:1000;
+      background:rgba(15,43,41,0.7); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+      padding:12px 20px; display:flex; align-items:center; justify-content:space-between;
+    }
+    .nav-logo { height:36px; width:auto; object-fit:contain; border-radius:8px; }
+    .nav-brand { font-family:'Quicksand'; font-weight:700; font-size:0.95rem; color:var(--seafoam); }
+    .nav-left { display:flex; align-items:center; gap:10px; }
+    .nav-links { display:none; gap:24px; list-style:none; }
+    .nav-links a { font-family:'Quicksand'; font-weight:600; font-size:0.85rem; color:rgba(240,253,250,0.6); transition:color .2s; }
+    .nav-links a:hover { color:#fff; }
+    .hamburger { background:none; border:none; width:36px; height:36px; display:flex; flex-direction:column; justify-content:center; gap:5px; padding:6px; cursor:pointer; }
+    .hamburger span { display:block; width:100%; height:2px; background:var(--seafoam); border-radius:2px; transition:all .3s; transform-origin:center; }
+    .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    #mobile-menu {
+      position:fixed; inset:0; background:rgba(15,43,41,0.92); backdrop-filter:blur(20px);
+      z-index:999; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px;
+      transform:translateX(100%); transition:transform .35s cubic-bezier(.22,1,.36,1);
+    }
+    #mobile-menu.open { transform:translateX(0); }
+    #mobile-menu a { font-family:'Quicksand'; font-weight:700; font-size:1.5rem; color:var(--seafoam); }
+    #mobile-menu .mm-cta { background:var(--amber); color:var(--ocean); padding:12px 32px; border-radius:100px; font-size:1rem; margin-top:8px; }
+
+    /* HERO */
+    #hero {
+      position:relative; min-height:100svh; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; overflow:hidden;
+      background:linear-gradient(135deg, var(--teal) 0%, var(--ocean) 40%, var(--amber) 100%);
+    }
+    .hero-content {
+      position:relative; z-index:2; text-align:center; padding:100px 24px 60px; max-width:600px;
+    }
+    .hero-logo-circle {
+      width:72px; height:72px; border-radius:50%; background:rgba(240,253,250,0.15);
+      border:1.5px solid rgba(240,253,250,0.3); margin:0 auto 20px;
+      display:flex; align-items:center; justify-content:center; overflow:hidden;
+    }
+    .hero-logo-circle img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+    .hero-script { font-family:'Caveat',cursive; font-size:clamp(1.2rem,3vw,1.6rem); color:var(--amber); margin-bottom:8px; }
+    .hero-content h1 {
+      font-family:'Quicksand'; font-weight:700; font-size:clamp(1.6rem,4.5vw,2.4rem);
+      color:var(--seafoam); line-height:1.35; margin-bottom:24px;
+    }
+    .btn-amber {
+      display:inline-block; background:var(--amber); color:var(--ocean); font-family:'Quicksand';
+      font-weight:700; font-size:0.9rem; padding:14px 32px; border-radius:100px;
+      border:none; cursor:pointer; transition:all .2s;
+      box-shadow:0 4px 20px rgba(245,158,11,0.3);
+    }
+    .btn-amber:hover { background:var(--amber-light); transform:translateY(-2px); box-shadow:0 6px 28px rgba(245,158,11,0.4); }
+
+    /* SECTIONS */
+    .section { padding:72px 20px; }
+    .section-inner { max-width:720px; margin:0 auto; }
+    .section-label { font-family:'Caveat',cursive; font-size:1.1rem; color:var(--amber); margin-bottom:4px; }
+    .section-title { font-family:'Quicksand'; font-weight:700; font-size:clamp(1.4rem,3.5vw,2rem); color:var(--teal-deep); margin-bottom:12px; }
+    .section-desc { font-size:0.95rem; color:var(--teal); line-height:1.7; max-width:520px; margin-bottom:28px; }
+
+    /* GLASS CARDS */
+    .glass-card {
+      background:var(--glass); border:1px solid var(--glass-border);
+      border-radius:20px; padding:20px; margin-bottom:12px;
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      transition:transform .2s, box-shadow .2s;
+    }
+    .glass-card:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(13,148,136,0.1); }
+    .glass-card h4 { font-family:'Quicksand'; font-weight:700; font-size:1rem; color:var(--teal-deep); margin-bottom:4px; }
+    .glass-card p { font-size:0.85rem; color:var(--teal); line-height:1.5; }
+    .glass-card .gprice { font-family:'Quicksand'; font-weight:700; font-size:1.3rem; color:var(--teal); margin-top:8px; }
+
+    /* FOOD FEATURE */
+    .food-feature {
+      background:var(--ocean); padding:56px 20px; text-align:center;
+    }
+    .food-feature .badge {
+      display:inline-block; background:rgba(245,158,11,0.2); border:1px solid rgba(245,158,11,0.4);
+      color:var(--amber); font-family:'Quicksand'; font-weight:700; font-size:0.65rem;
+      padding:4px 14px; border-radius:100px; text-transform:uppercase; letter-spacing:0.15em; margin-bottom:12px;
+    }
+    .food-feature h3 { font-family:'Quicksand'; font-weight:700; font-size:1.6rem; color:var(--seafoam); }
+    .food-feature .price { font-family:'Quicksand'; font-weight:700; font-size:2rem; color:var(--amber); margin-top:4px; }
+    .food-feature .desc { font-size:0.85rem; color:rgba(240,253,250,0.5); margin-top:8px; }
+    .food-feature-img { max-width:300px; height:180px; margin:20px auto 0; border-radius:16px; overflow:hidden; }
+
+    /* WAVE DIVIDER */
+    .wave { width:100%; line-height:0; display:block; }
+    .wave svg { display:block; width:100%; }
+    .wave-down svg { transform:scaleY(-1); }
+
+    /* DRINKS GRID */
+    .drinks-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .drink-card {
+      background:linear-gradient(135deg, var(--teal), #0F766E);
+      border-radius:16px; padding:20px; text-align:center; transition:transform .2s;
+    }
+    .drink-card:hover { transform:translateY(-2px); }
+    .drink-card:nth-child(3) { background:linear-gradient(135deg, var(--amber), var(--coral)); }
+    .drink-card:nth-child(4) { background:linear-gradient(135deg, var(--teal-deep), var(--ocean)); }
+    .drink-card h4 { font-family:'Quicksand'; font-weight:700; font-size:0.95rem; color:var(--seafoam); margin-bottom:4px; }
+    .drink-card .from { font-size:0.8rem; color:rgba(240,253,250,0.6); }
+
+    /* MENU CTA */
+    .menu-cta { text-align:center; margin-top:24px; }
+    .btn-outline-teal {
+      display:inline-block; border:2px solid var(--teal); color:var(--teal); font-family:'Quicksand';
+      font-weight:700; font-size:0.85rem; padding:12px 28px; border-radius:100px; transition:all .2s;
+    }
+    .btn-outline-teal:hover { background:var(--teal); color:#fff; }
+
+    /* VISIT */
+    .visit-grid { display:grid; grid-template-columns:1fr; gap:16px; }
+    .visit-item { display:flex; gap:14px; align-items:flex-start; }
+    .visit-icon {
+      width:44px; height:44px; background:rgba(13,148,136,0.1); border:1px solid var(--glass-border);
+      border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+      color:var(--teal); font-size:1.1rem;
+    }
+    .visit-item h4 { font-family:'Quicksand'; font-weight:700; font-size:0.9rem; color:var(--teal-deep); margin-bottom:2px; }
+    .visit-item p { font-size:0.85rem; color:var(--teal); line-height:1.5; }
+
+    /* FOOTER */
+    .footer { background:var(--ocean); padding:32px 20px; text-align:center; }
+    .footer .brand { font-family:'Quicksand'; font-weight:700; font-size:1rem; color:var(--seafoam); margin-bottom:8px; }
+    .footer p { font-size:0.75rem; color:rgba(240,253,250,0.35); }
+
+    /* STICKY CTA */
+    .sticky-cta {
+      position:fixed; bottom:0; left:0; right:0; z-index:900;
+      background:linear-gradient(135deg, var(--teal), var(--amber));
+      padding:12px 20px; display:flex; align-items:center; justify-content:center; gap:10px;
+      box-shadow:0 -4px 20px rgba(13,148,136,0.3);
+    }
+    .sticky-cta a {
+      font-family:'Quicksand'; font-weight:700; font-size:0.9rem; color:#fff;
+    }
+    .sticky-cta .phone-icon { font-size:1.1rem; color:#fff; }
+
+    /* RESPONSIVE */
+    @media(min-width:640px) {
+      .visit-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media(min-width:900px) {
+      .hamburger { display:none; }
+      .nav-links { display:flex; }
+      .section { padding:100px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-left">
+    <img src="f56b3b19-4c80-4755-a889-98602d9b2b55.jpeg" alt="The Backyard Place" class="nav-logo">
+    <span class="nav-brand">The Backyard</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#drinks">Drinks</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div id="mobile-menu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#menu" onclick="toggleMenu()">Menu</a>
+  <a href="#drinks" onclick="toggleMenu()">Drinks</a>
+  <a href="#visit" onclick="toggleMenu()">Visit</a>
+  <a href="tel:09511306264" class="mm-cta" onclick="toggleMenu()">Call Now</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content fade-in">
+    <div class="hero-logo-circle">
+      <img src="f56b3b19-4c80-4755-a889-98602d9b2b55.jpeg" alt="The Backyard Place">
+    </div>
+    <div class="hero-script">where the sea meets the grill</div>
+    <h1>Fresh Seafood.<br>Tropical Drinks.<br>Good Vibes Only.</h1>
+    <a href="#menu" class="btn-amber">Explore Menu</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section" style="background:var(--seafoam);">
+  <div class="section-inner">
+    <div class="section-label fade-in">Since 2016</div>
+    <div class="section-title fade-in">What We're Known For</div>
+    <p class="section-desc fade-in">Ten years of fresh catch, charcoal grills, and ice-cold drinks under the Aklan sky. The Backyard Place is Kalibo's neighborhood seafood grill bar.</p>
+    <div class="fade-in">
+      <div class="glass-card">
+        <h4>Freshly Shucked Talaba</h4>
+        <p>Steamed, baked, or raw — straight from Aklan's waters</p>
+      </div>
+      <div class="glass-card">
+        <h4>Grilled Over Charcoal</h4>
+        <p>Tanigue, bangus, prawns — kissed by real flame</p>
+      </div>
+      <div class="glass-card">
+        <h4>Sizzling Platters</h4>
+        <p>From sisig to sinigang — served hot on iron plates</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE DOWN -->
+<div class="wave" style="background:var(--seafoam);">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:40px;">
+    <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#0F2B29"/>
+  </svg>
+</div>
+
+<!-- FOOD FEATURE -->
+<div class="food-feature fade-in">
+  <div class="badge">Best Seller</div>
+  <h3>Bad Boy Platter</h3>
+  <div class="price">&#8369;1,399</div>
+  <div class="desc">The ultimate barkada sharing board</div>
+  <div class="food-feature-img">
+    <img src="bad boy platter.jpg" alt="Bad Boy Platter">
+  </div>
+</div>
+
+<!-- WAVE UP -->
+<div class="wave" style="background:var(--seafoam);">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:40px;">
+    <path d="M0,80 L0,40 C240,0 480,80 720,40 C960,0 1200,80 1440,40 L1440,0 L0,0 Z" fill="#0F2B29"/>
+  </svg>
+</div>
+
+<!-- MENU -->
+<section id="menu" class="section" style="background:var(--seafoam);">
+  <div class="section-inner">
+    <div class="section-label fade-in">Luto sa Backyard</div>
+    <div class="section-title fade-in">Signature Dishes</div>
+    <div class="fade-in">
+      <div class="glass-card" style="display:flex;align-items:center;gap:16px;">
+        <div style="width:64px;height:64px;border-radius:12px;overflow:hidden;flex-shrink:0;">
+          <img src="bad boy platter.jpg" alt="Bad Boy Platter">
+        </div>
+        <div style="flex:1;">
+          <h4>Bad Boy Platter</h4>
+          <p>The ultimate barkada sharing board</p>
+        </div>
+        <div style="font-family:'Quicksand';font-weight:700;font-size:1.1rem;color:var(--teal);white-space:nowrap;">&#8369;1,399</div>
+      </div>
+      <div class="glass-card" style="display:flex;align-items:center;gap:16px;">
+        <div style="width:64px;height:64px;border-radius:12px;overflow:hidden;flex-shrink:0;background:var(--teal);opacity:0.2;"></div>
+        <div style="flex:1;">
+          <h4>Seafood Platter</h4>
+          <p>Mixed catch of the day</p>
+        </div>
+        <div style="font-family:'Quicksand';font-weight:700;font-size:1.1rem;color:var(--teal);white-space:nowrap;">&#8369;1,299</div>
+      </div>
+      <div class="glass-card" style="display:flex;align-items:center;gap:16px;">
+        <div style="width:64px;height:64px;border-radius:12px;overflow:hidden;flex-shrink:0;background:var(--teal);opacity:0.2;"></div>
+        <div style="flex:1;">
+          <h4>Steamed Talaba</h4>
+          <p>Fresh Aklan oysters</p>
+        </div>
+        <div style="font-family:'Quicksand';font-weight:700;font-size:1.1rem;color:var(--teal);white-space:nowrap;">&#8369;249</div>
+      </div>
+      <div class="glass-card" style="display:flex;align-items:center;gap:16px;">
+        <div style="width:64px;height:64px;border-radius:12px;overflow:hidden;flex-shrink:0;">
+          <img src="sizzling pork sinigang.jpg" alt="Sizzling Pork Sinigang">
+        </div>
+        <div style="flex:1;">
+          <h4>Sizzling Pork Sinigang</h4>
+          <p>Served hot on iron plate</p>
+        </div>
+        <div style="font-family:'Quicksand';font-weight:700;font-size:1.1rem;color:var(--teal);white-space:nowrap;">&#8369;349</div>
+      </div>
+    </div>
+    <div class="menu-cta fade-in">
+      <a href="menu.html" class="btn-outline-teal">View Full Menu &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- DRINKS -->
+<section id="drinks" class="section" style="background:var(--seafoam);">
+  <div class="section-inner">
+    <div class="section-label fade-in">Tagay!</div>
+    <div class="section-title fade-in">Tropical Sips</div>
+    <div class="drinks-grid fade-in">
+      <div class="drink-card">
+        <h4>Cocktails</h4>
+        <div class="from">from &#8369;139</div>
+      </div>
+      <div class="drink-card">
+        <h4>Fruit Shakes</h4>
+        <div class="from">from &#8369;129</div>
+      </div>
+      <div class="drink-card">
+        <h4>Fresh Juices</h4>
+        <div class="from">from &#8369;75</div>
+      </div>
+      <div class="drink-card">
+        <h4>Beer &amp; Hard</h4>
+        <div class="from">from &#8369;65</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GROUP MEALS -->
+<section class="section" style="background:var(--seafoam);">
+  <div class="section-inner">
+    <div class="section-label fade-in">Barkada Deals</div>
+    <div class="section-title fade-in">Group Meals</div>
+    <div class="fade-in">
+      <div class="glass-card">
+        <h4>Set 1 &mdash; 4-5 pax</h4>
+        <div class="gprice">&#8369;1,449</div>
+      </div>
+      <div class="glass-card">
+        <h4>Set 2 &mdash; 6-7 pax</h4>
+        <div class="gprice">&#8369;2,299</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit" class="section" style="background:var(--seafoam);">
+  <div class="section-inner">
+    <div class="section-label fade-in">Punta Ka Na</div>
+    <div class="section-title fade-in">Visit The Backyard</div>
+    <div class="visit-grid fade-in">
+      <div class="visit-item">
+        <div class="visit-icon">&#9906;</div>
+        <div>
+          <h4>Location</h4>
+          <p>Old Buswang, Kalibo, Aklan</p>
+        </div>
+      </div>
+      <div class="visit-item">
+        <div class="visit-icon">&#9742;</div>
+        <div>
+          <h4>Call / Reserve</h4>
+          <p><a href="tel:09511306264" style="color:var(--teal);">0951 130 6264</a></p>
+        </div>
+      </div>
+      <div class="visit-item">
+        <div class="visit-icon">&#9201;</div>
+        <div>
+          <h4>Hours</h4>
+          <p>Open Daily 10:00 AM &ndash; 12:00 MN</p>
+        </div>
+      </div>
+      <div class="visit-item">
+        <div class="visit-icon">f</div>
+        <div>
+          <h4>Facebook</h4>
+          <p><a href="https://www.facebook.com/backyardkalibo" target="_blank" style="color:var(--teal);">@backyardkalibo</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE INTO FOOTER -->
+<div class="wave" style="background:var(--seafoam);">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:40px;">
+    <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#0F2B29"/>
+  </svg>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="brand">The Backyard Place</div>
+  <p>Old Buswang, Kalibo, Aklan &bull; Open Daily 10 AM &ndash; 12 MN</p>
+  <p style="margin-top:8px;">&copy; 2026 The Backyard Place. All rights reserved.</p>
+</footer>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta">
+  <span class="phone-icon">&#9742;</span>
+  <a href="tel:09511306264">Call Now &mdash; 0951 130 6264</a>
+</div>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+    document.querySelector('.hamburger').classList.toggle('open');
+  }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold:0.1, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
