@@ -2393,5 +2393,11 @@
     window.addEventListener('scroll', updateActiveLink, { passive: true });
   </script>
 
+<!-- Back to presentation (hidden in iframes) -->
+<a id="back-to-preview" href="preview.html" style="display:none;position:fixed;top:16px;right:16px;z-index:9998;background:#3D2B1F;color:#FFF8F0;font-family:'Rubik',sans-serif;font-size:0.75rem;font-weight:600;padding:8px 16px;border-radius:100px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.25);letter-spacing:0.04em;">&#8592; Back to Presentation</a>
+<script>
+  if(window.self === window.top) document.getElementById('back-to-preview').style.display='block';
+</script>
+
 </body>
 </html>

@@ -933,5 +933,11 @@
   });
 </script>
 
+<!-- Back to presentation (hidden in iframes) -->
+<a id="back-to-preview" href="../preview.html" style="display:none;position:fixed;top:16px;right:16px;z-index:9998;background:#C9A962;color:#0A0A0A;font-family:'Manrope',sans-serif;font-size:0.7rem;font-weight:700;padding:8px 16px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.4);letter-spacing:0.1em;text-transform:uppercase;">&#8592; Back to Presentation</a>
+<script>
+  if(window.self === window.top) document.getElementById('back-to-preview').style.display='block';
+</script>
+
 </body>
 </html>
