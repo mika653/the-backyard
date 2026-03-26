@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Backyard Place — Web Development Proposal | Fishbone Creative Solutions</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS v4 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <style type="text/tailwindcss">
+    @theme {
+      --color-page: #0F0F0F;
+      --color-card: #0A0A0A;
+      --color-border: #1F1F1F;
+      --color-gold: #C9A962;
+      --color-gold-muted: #9A7D42;
+      --color-cream: #FAF8F5;
+      --color-secondary: #888888;
+      --color-tertiary: #666666;
+      --color-success: #4ADE80;
+      --color-error: #F87171;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Manrope', system-ui, sans-serif;
+    }
+
+    * {
+      border-radius: 0 !important;
+    }
+
+    html {
+      background-color: #0F0F0F;
+      color: #FAF8F5;
+      font-family: 'Manrope', system-ui, sans-serif;
+    }
+
+    .font-serif {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    .font-sans {
+      font-family: 'Manrope', system-ui, sans-serif;
+    }
+
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+    .fade-in-delay-4 { transition-delay: 0.4s; }
+    .fade-in-delay-5 { transition-delay: 0.5s; }
+    .fade-in-delay-6 { transition-delay: 0.6s; }
+
+    /* Corner decorations */
+    .corner-tl::before,
+    .corner-tl::after {
+      content: '';
+      position: absolute;
+      background: #C9A962;
+    }
+    .corner-tl::before {
+      top: 32px; left: 32px;
+      width: 40px; height: 1px;
+    }
+    .corner-tl::after {
+      top: 32px; left: 32px;
+      width: 1px; height: 40px;
+    }
+
+    .corner-br::before,
+    .corner-br::after {
+      content: '';
+      position: absolute;
+      background: #C9A962;
+    }
+    .corner-br::before {
+      bottom: 32px; right: 32px;
+      width: 40px; height: 1px;
+    }
+    .corner-br::after {
+      bottom: 32px; right: 32px;
+      width: 1px; height: 40px;
+    }
+
+    /* Gold gradient CTA button */
+    .btn-gold {
+      background: linear-gradient(135deg, #C9A962 0%, #E8CC8A 50%, #C9A962 100%);
+      color: #0A0A0A;
+      font-family: 'Manrope', system-ui, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      font-size: 0.8rem;
+      padding: 16px 40px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .btn-gold:hover {
+      opacity: 0.85;
+    }
+
+    /* Gold gradient border for CTA box */
+    .cta-border {
+      border: 1px solid #C9A962;
+      box-shadow: 0 0 40px rgba(201, 169, 98, 0.08);
+    }
+
+    /* Recommended card gold border */
+    .card-recommended {
+      border: 1px solid #C9A962;
+      box-shadow: 0 0 32px rgba(201, 169, 98, 0.10);
+    }
+
+    /* Scroll-triggered sections */
+    section {
+      overflow: hidden;
+    }
+
+    /* Page number style */
+    .page-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 7rem;
+      color: #C9A962;
+      opacity: 0.07;
+      line-height: 1;
+      font-weight: 600;
+      user-select: none;
+      position: absolute;
+      top: -10px;
+      right: 0;
+    }
+
+    @media (max-width: 768px) {
+      .page-num {
+        font-size: 4.5rem;
+      }
+      .corner-tl::before { top: 20px; left: 20px; width: 28px; }
+      .corner-tl::after  { top: 20px; left: 20px; height: 28px; }
+      .corner-br::before { bottom: 20px; right: 20px; width: 28px; }
+      .corner-br::after  { bottom: 20px; right: 20px; height: 28px; }
+    }
+  </style>
+</head>
+
+<body style="background-color:#0F0F0F; color:#FAF8F5; font-family:'Manrope',system-ui,sans-serif; margin:0; padding:0;">
+
+<!-- ============================================================
+     SECTION 1: COVER / HERO
+     ============================================================ -->
+<section id="cover" style="min-height:100vh; background-color:#0A0A0A; border-bottom:1px solid #1F1F1F; position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:80px 40px;" class="corner-tl corner-br">
+
+  <!-- Top bar -->
+  <div style="position:absolute; top:32px; left:50%; transform:translateX(-50%); width:calc(100% - 160px); display:flex; justify-content:space-between; align-items:center;">
+    <span style="font-family:'Manrope',sans-serif; font-size:0.65rem; letter-spacing:0.25em; color:#444444; text-transform:uppercase;">Confidential</span>
+    <span style="font-family:'Manrope',sans-serif; font-size:0.65rem; letter-spacing:0.25em; color:#444444; text-transform:uppercase;">2026</span>
+  </div>
+
+  <!-- Main content -->
+  <div style="text-align:center; max-width:720px; width:100%;" class="fade-in">
+
+    <!-- Client Logo -->
+    <div style="margin-bottom:40px; display:flex; justify-content:center;" class="fade-in fade-in-delay-1">
+      <img src="../f56b3b19-4c80-4755-a889-98602d9b2b55.jpeg" alt="The Backyard Place" style="height:96px; width:auto; object-fit:contain; filter:brightness(1.05);" />
+    </div>
+
+    <!-- Label -->
+    <div class="fade-in fade-in-delay-2" style="margin-bottom:24px;">
+      <span style="font-family:'Manrope',sans-serif; font-size:0.7rem; font-weight:600; letter-spacing:0.35em; color:#C9A962; text-transform:uppercase;">Web Development</span>
+    </div>
+
+    <!-- Proposal headline -->
+    <h1 class="fade-in fade-in-delay-3" style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(3.5rem,8vw,6.5rem); font-weight:500; color:#FAF8F5; line-height:1.05; margin:0 0 8px 0;">
+      Proposal
+    </h1>
+    <p class="fade-in fade-in-delay-4" style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(1.2rem,3vw,1.75rem); font-style:italic; color:#888888; margin:0 0 40px 0;">
+      for The Backyard Place
+    </p>
+
+    <!-- Gold divider -->
+    <div class="fade-in fade-in-delay-5" style="display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:56px;">
+      <div style="flex:1; max-width:120px; height:1px; background:#C9A962; opacity:0.5;"></div>
+      <div style="width:5px; height:5px; background:#C9A962; transform:rotate(45deg);"></div>
+      <div style="flex:1; max-width:120px; height:1px; background:#C9A962; opacity:0.5;"></div>
+    </div>
+
+    <!-- Prepared by -->
+    <div class="fade-in fade-in-delay-6" style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+      <span style="font-family:'Manrope',sans-serif; font-size:0.65rem; font-weight:600; letter-spacing:0.3em; color:#666666; text-transform:uppercase;">Prepared By</span>
+      <img src="fishbone-logo.jpeg" alt="Fishbone Creative Solutions" style="height:48px; width:auto; object-fit:contain; filter:brightness(1.1) contrast(1.05);" />
+      <span style="font-family:'Manrope',sans-serif; font-size:0.75rem; font-weight:500; color:#666666; letter-spacing:0.15em;">March 2026</span>
+    </div>
+
+  </div>
+
+  <!-- Bottom border line -->
+  <div style="position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, #C9A962 30%, #C9A962 70%, transparent);"></div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 2: ABOUT US
+     ============================================================ -->
+<section id="about" style="min-height:100vh; background-color:#0F0F0F; border-bottom:1px solid #1F1F1F; padding:100px 40px; display:flex; flex-direction:column; justify-content:center;">
+  <div style="max-width:1100px; margin:0 auto; width:100%;">
+
+    <!-- Section header -->
+    <div style="position:relative; margin-bottom:64px;">
+      <div class="page-num">01</div>
+      <span class="fade-in" style="font-family:'Manrope',sans-serif; font-size:0.65rem; font-weight:600; letter-spacing:0.35em; color:#C9A962; text-transform:uppercase; display:block; margin-bottom:16px;">About Us</span>
+      <h2 class="fade-in fade-in-delay-1" style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:500; color:#FAF8F5; margin:0 0 24px 0; line-height:1.15;">
+        Who We Are
+      </h2>
+      <div class="fade-in fade-in-delay-2" style="display:flex; align-items:center; gap:16px; margin-bottom:32px;">
+        <div style="width:48px; height:1px; background:#C9A962;"></div>
+        <div style="width:5px; height:5px; background:#C9A962; transform:rotate(45deg);"></div>
+      </div>
+      <p class="fade-in fade-in-delay-3" style="font-family:'Manrope',sans-serif; font-size:1.05rem; line-height:1.85; color:#888888; max-width:640px;">
+        Fishbone Creative Solutions is a digital-first creative agency that builds websites, brands, and digital experiences for businesses ready to grow online. We combine strategic thinking with clean, modern design to deliver results — not just visuals.
+      </p>
+    </div>
+
+    <!-- 3-column services grid -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1px; background:#1F1F1F; margin-bottom:64px;">
+
+      <!-- Web Development -->
+      <div class="fade-in fade-in-delay-1" style="background:#0A0A0A; padding:40px 36px;">
+        <div style="margin-bottom:20px;">
+          <i data-lucide="code-2" style="width:28px; height:28px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.15rem; font-weight:500; color:#FAF8F5; margin:0 0 12px 0;">Web Development</h3>
+        <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; line-height:1.75; color:#666666; margin:0;">
+          Custom-built websites that are fast, responsive, and built to convert visitors into customers.
+        </p>
+      </div>
+
+      <!-- Brand Design -->
+      <div class="fade-in fade-in-delay-2" style="background:#0A0A0A; padding:40px 36px;">
+        <div style="margin-bottom:20px;">
+          <i data-lucide="pen-tool" style="width:28px; height:28px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.15rem; font-weight:500; color:#FAF8F5; margin:0 0 12px 0;">Brand Design</h3>
+        <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; line-height:1.75; color:#666666; margin:0;">
+          Visual identities that communicate who you are before you say a word — crafted with intention and clarity.
+        </p>
+      </div>
+
+      <!-- Digital Growth -->
+      <div class="fade-in fade-in-delay-3" style="background:#0A0A0A; padding:40px 36px;">
+        <div style="margin-bottom:20px;">
+          <i data-lucide="trending-up" style="width:28px; height:28px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.15rem; font-weight:500; color:#FAF8F5; margin:0 0 12px 0;">Digital Growth</h3>
+        <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; line-height:1.75; color:#666666; margin:0;">
+          SEO, analytics, and ongoing strategy that keeps your business visible and growing in an increasingly digital world.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Quote -->
+    <div class="fade-in" style="border-left:2px solid #C9A962; padding:16px 0 16px 32px;">
+      <p style="font-family:'Playfair Display',Georgia,serif; font-size:1.2rem; font-style:italic; color:#888888; margin:0; line-height:1.6;">
+        "We don't just build websites — we build your digital foundation."
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 3: THE VISION
+     ============================================================ -->
+<section id="vision" style="min-height:100vh; background-color:#0A0A0A; border-bottom:1px solid #1F1F1F; padding:100px 40px; display:flex; flex-direction:column; justify-content:center;">
+  <div style="max-width:1100px; margin:0 auto; width:100%;">
+
+    <!-- Section header -->
+    <div style="position:relative; margin-bottom:64px;">
+      <div class="page-num">02</div>
+      <span class="fade-in" style="font-family:'Manrope',sans-serif; font-size:0.65rem; font-weight:600; letter-spacing:0.35em; color:#C9A962; text-transform:uppercase; display:block; margin-bottom:16px;">The Vision</span>
+      <h2 class="fade-in fade-in-delay-1" style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(2rem,5vw,3.2rem); font-weight:500; color:#FAF8F5; margin:0 0 24px 0; line-height:1.15;">
+        From Facebook Page<br>to Digital Destination
+      </h2>
+      <div class="fade-in fade-in-delay-2" style="display:flex; align-items:center; gap:16px; margin-bottom:28px;">
+        <div style="width:48px; height:1px; background:#C9A962;"></div>
+        <div style="width:5px; height:5px; background:#C9A962; transform:rotate(45deg);"></div>
+      </div>
+      <p class="fade-in fade-in-delay-3" style="font-family:'Manrope',sans-serif; font-size:1rem; line-height:1.85; color:#888888; max-width:620px;">
+        The Backyard Place has been Kalibo's go-to tropical seafood grill bar since 2016 — 10 years of sizzling platters, fresh talaba, cold drinks, and good vibes. The website should match that reputation — a welcoming digital storefront that makes hungry customers call, visit, and come back.
+      </p>
+    </div>
+
+    <!-- Design Pillars -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1px; background:#1F1F1F; margin-bottom:56px;">
+
+      <div class="fade-in fade-in-delay-1" style="background:#0F0F0F; padding:40px 36px;">
+        <div style="margin-bottom:20px; width:44px; height:44px; border:1px solid rgba(201,169,98,0.25); display:flex; align-items:center; justify-content:center;">
+          <i data-lucide="sun" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:500; color:#FAF8F5; margin:0 0 12px 0;">Tropical Rustic Palette</h3>
+        <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; line-height:1.75; color:#666666; margin:0;">Warm creams, amber tones, ocean teals, and earthy bark — a color palette that feels like an island grill under the stars.</p>
+      </div>
+
+      <div class="fade-in fade-in-delay-2" style="background:#0F0F0F; padding:40px 36px;">
+        <div style="margin-bottom:20px; width:44px; height:44px; border:1px solid rgba(201,169,98,0.25); display:flex; align-items:center; justify-content:center;">
+          <i data-lucide="image" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:500; color:#FAF8F5; margin:0 0 12px 0;">Mouth-Watering Imagery</h3>
+        <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; line-height:1.75; color:#666666; margin:0;">Hero shots of sizzling platters, fresh talaba, and the open-air dining area that make visitors hungry before they even read a word.</p>
+      </div>
+
+      <div class="fade-in fade-in-delay-3" style="background:#0F0F0F; padding:40px 36px;">
+        <div style="margin-bottom:20px; width:44px; height:44px; border:1px solid rgba(201,169,98,0.25); display:flex; align-items:center; justify-content:center;">
+          <i data-lucide="phone-call" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:500; color:#FAF8F5; margin:0 0 12px 0;">Action-First UI</h3>
+        <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; line-height:1.75; color:#666666; margin:0;">Sticky click-to-call button, prominent hours and location, and a shareable menu — designed so mobile visitors can act instantly.</p>
+      </div>
+
+    </div>
+
+    <!-- Menu Categories -->
+    <div class="fade-in" style="margin-bottom:56px;">
+      <p style="font-family:'Manrope',sans-serif; font-size:0.65rem; font-weight:700; letter-spacing:0.3em; color:#666666; text-transform:uppercase; margin:0 0 24px 0;">Menu Highlights</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:12px;">
+        <div style="border:1px solid #1F1F1F; padding:16px 20px; text-align:center;">
+          <i data-lucide="shell" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5; margin-bottom:8px;"></i>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.8rem; font-weight:500; color:#FAF8F5; margin:0;">Fresh Seafood</p>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.7rem; color:#666666; margin:4px 0 0;">Talaba, Shrimp, Fish</p>
+        </div>
+        <div style="border:1px solid #1F1F1F; padding:16px 20px; text-align:center;">
+          <i data-lucide="flame" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5; margin-bottom:8px;"></i>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.8rem; font-weight:500; color:#FAF8F5; margin:0;">Grilled & Sizzling</p>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.7rem; color:#666666; margin:4px 0 0;">Platters, Pork Sinigang</p>
+        </div>
+        <div style="border:1px solid #1F1F1F; padding:16px 20px; text-align:center;">
+          <i data-lucide="beer" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5; margin-bottom:8px;"></i>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.8rem; font-weight:500; color:#FAF8F5; margin:0;">Cold Drinks</p>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.7rem; color:#666666; margin:4px 0 0;">Beer, Cocktails, Shakes</p>
+        </div>
+        <div style="border:1px solid #1F1F1F; padding:16px 20px; text-align:center;">
+          <i data-lucide="utensils" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5; margin-bottom:8px;"></i>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.8rem; font-weight:500; color:#FAF8F5; margin:0;">Pulutan & Sides</p>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.7rem; color:#666666; margin:4px 0 0;">Sisig, Wings, Nachos</p>
+        </div>
+        <div style="border:1px solid #1F1F1F; padding:16px 20px; text-align:center;">
+          <i data-lucide="cake" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5; margin-bottom:8px;"></i>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.8rem; font-weight:500; color:#FAF8F5; margin:0;">Group Platters</p>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.7rem; color:#666666; margin:4px 0 0;">Bad Boy, Family Sets</p>
+        </div>
+        <div style="border:1px solid #1F1F1F; padding:16px 20px; text-align:center;">
+          <i data-lucide="users" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5; margin-bottom:8px;"></i>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.8rem; font-weight:500; color:#FAF8F5; margin:0;">Events & Groups</p>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.7rem; color:#666666; margin:4px 0 0;">Birthdays, Team Dinners</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Local identity callout -->
+    <div class="fade-in" style="border-left:2px solid #C9A962; padding:20px 0 20px 32px; margin-bottom:0;">
+      <p style="font-family:'Manrope',sans-serif; font-size:0.65rem; font-weight:700; letter-spacing:0.3em; color:#C9A962; text-transform:uppercase; margin:0 0 10px 0;">Local Seafood Identity</p>
+      <p style="font-family:'Manrope',sans-serif; font-size:0.9rem; line-height:1.75; color:#888888; margin:0;">
+        The website will spotlight what makes The Backyard unique — Kalibo's freshest local seafood, open-air tropical dining, and a decade of being the town's favorite grill bar. Think Gerry's Grill energy, but with genuine Aklanon soul.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 4: SCOPE OF WORK (CORE FEATURES)
+     ============================================================ -->
+<section id="scope" style="min-height:100vh; background-color:#0F0F0F; border-bottom:1px solid #1F1F1F; padding:100px 40px; display:flex; flex-direction:column; justify-content:center;">
+  <div style="max-width:1100px; margin:0 auto; width:100%;">
+
+    <!-- Section header -->
+    <div style="position:relative; margin-bottom:64px;">
+      <div class="page-num">03</div>
+      <span class="fade-in" style="font-family:'Manrope',sans-serif; font-size:0.65rem; font-weight:600; letter-spacing:0.35em; color:#C9A962; text-transform:uppercase; display:block; margin-bottom:16px;">Core Features</span>
+      <h2 class="fade-in fade-in-delay-1" style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(2rem,5vw,3.2rem); font-weight:500; color:#FAF8F5; margin:0 0 24px 0; line-height:1.15;">
+        What We'll Build
+      </h2>
+      <div class="fade-in fade-in-delay-2" style="display:flex; align-items:center; gap:16px; margin-bottom:28px;">
+        <div style="width:48px; height:1px; background:#C9A962;"></div>
+        <div style="width:5px; height:5px; background:#C9A962; transform:rotate(45deg);"></div>
+      </div>
+      <p class="fade-in fade-in-delay-3" style="font-family:'Manrope',sans-serif; font-size:1rem; line-height:1.85; color:#888888; max-width:580px;">
+        Not a generic restaurant template — a mobile-first website built specifically for how The Backyard Place attracts and serves customers in Kalibo.
+      </p>
+    </div>
+
+    <!-- 6-item deliverables grid -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1px; background:#1F1F1F; margin-bottom:48px;">
+
+      <!-- Item 1: Homepage -->
+      <div class="fade-in fade-in-delay-1" style="background:#0A0A0A; padding:36px 32px; display:flex; gap:20px; align-items:flex-start;">
+        <div style="flex-shrink:0; width:44px; height:44px; border:1px solid #1F1F1F; display:flex; align-items:center; justify-content:center;">
+          <i data-lucide="layout-grid" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <div>
+          <h4 style="font-family:'Manrope',sans-serif; font-size:0.9rem; font-weight:600; color:#FAF8F5; margin:0 0 8px 0;">Homepage with Bento Grid</h4>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.825rem; line-height:1.7; color:#666666; margin:0;">A visually rich homepage showcasing hero imagery, menu highlights, location, hours (10 AM – 12 MN daily), and trust signals — all in a modern bento grid layout.</p>
+        </div>
+      </div>
+
+      <!-- Item 2: Shareable Menu Page -->
+      <div class="fade-in fade-in-delay-2" style="background:#0A0A0A; padding:36px 32px; display:flex; gap:20px; align-items:flex-start;">
+        <div style="flex-shrink:0; width:44px; height:44px; border:1px solid #1F1F1F; display:flex; align-items:center; justify-content:center;">
+          <i data-lucide="book-open" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <div>
+          <h4 style="font-family:'Manrope',sans-serif; font-size:0.9rem; font-weight:600; color:#FAF8F5; margin:0 0 8px 0;">Shareable Digital Menu</h4>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.825rem; line-height:1.7; color:#666666; margin:0;">A dedicated menu page customers can share via Messenger and social media — complete with categories, prices, and mouth-watering photos.</p>
+        </div>
+      </div>
+
+      <!-- Item 3: Mobile-First + Click-to-Call -->
+      <div class="fade-in fade-in-delay-3" style="background:#0A0A0A; padding:36px 32px; display:flex; gap:20px; align-items:flex-start;">
+        <div style="flex-shrink:0; width:44px; height:44px; border:1px solid #1F1F1F; display:flex; align-items:center; justify-content:center;">
+          <i data-lucide="smartphone" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <div>
+          <h4 style="font-family:'Manrope',sans-serif; font-size:0.9rem; font-weight:600; color:#FAF8F5; margin:0 0 8px 0;">Mobile-First + Click-to-Call</h4>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.825rem; line-height:1.7; color:#666666; margin:0;">Built for how Filipinos browse — fast on mobile data, with a sticky call button (0951 130 6264) always visible so customers can reserve instantly.</p>
+        </div>
+      </div>
+
+      <!-- Item 4: SEO & Google Maps -->
+      <div class="fade-in fade-in-delay-4" style="background:#0A0A0A; padding:36px 32px; display:flex; gap:20px; align-items:flex-start;">
+        <div style="flex-shrink:0; width:44px; height:44px; border:1px solid #1F1F1F; display:flex; align-items:center; justify-content:center;">
+          <i data-lucide="search" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <div>
+          <h4 style="font-family:'Manrope',sans-serif; font-size:0.9rem; font-weight:600; color:#FAF8F5; margin:0 0 8px 0;">SEO & Google Maps</h4>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.825rem; line-height:1.7; color:#666666; margin:0;">Local SEO so you rank for "seafood restaurant Kalibo" and "grill bar near Boracay." Embedded Google Maps to Old Buswang, Kalibo, Aklan.</p>
+        </div>
+      </div>
+
+      <!-- Item 5: Facebook & Messenger -->
+      <div class="fade-in fade-in-delay-5" style="background:#0A0A0A; padding:36px 32px; display:flex; gap:20px; align-items:flex-start;">
+        <div style="flex-shrink:0; width:44px; height:44px; border:1px solid #1F1F1F; display:flex; align-items:center; justify-content:center;">
+          <i data-lucide="message-circle" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <div>
+          <h4 style="font-family:'Manrope',sans-serif; font-size:0.9rem; font-weight:600; color:#FAF8F5; margin:0 0 8px 0;">Facebook & Messenger Integration</h4>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.825rem; line-height:1.7; color:#666666; margin:0;">Direct links to your Facebook page (@backyardkalibo), Messenger chat widget, and social sharing — connecting your online presence seamlessly.</p>
+        </div>
+      </div>
+
+      <!-- Item 6: Deployment -->
+      <div class="fade-in fade-in-delay-6" style="background:#0A0A0A; padding:36px 32px; display:flex; gap:20px; align-items:flex-start;">
+        <div style="flex-shrink:0; width:44px; height:44px; border:1px solid #1F1F1F; display:flex; align-items:center; justify-content:center;">
+          <i data-lucide="rocket" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <div>
+          <h4 style="font-family:'Manrope',sans-serif; font-size:0.9rem; font-weight:600; color:#FAF8F5; margin:0 0 8px 0;">Deployment & Hosting</h4>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.825rem; line-height:1.7; color:#666666; margin:0;">Vercel deployment or hosting of your choice. You own the domain, the code, and the hosting — from day one.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Ownership banner -->
+    <div class="fade-in" style="background:rgba(201,169,98,0.05); border:1px solid rgba(201,169,98,0.2); padding:32px 36px; display:flex; align-items:flex-start; gap:20px;">
+      <div style="flex-shrink:0; margin-top:2px;">
+        <i data-lucide="shield-check" style="width:28px; height:28px; color:#C9A962; stroke-width:1.5;"></i>
+      </div>
+      <div>
+        <h4 style="font-family:'Manrope',sans-serif; font-size:0.85rem; font-weight:700; color:#C9A962; letter-spacing:0.15em; text-transform:uppercase; margin:0 0 10px 0;">Full Ownership Guarantee</h4>
+        <p style="font-family:'Manrope',sans-serif; font-size:0.9rem; line-height:1.75; color:#888888; margin:0;">
+          You own your domain, hosting, and all code from Day 1. No lock-in. No hidden fees. Full control, always.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 5: PAYMENT TIERS
+     ============================================================ -->
+<section id="pricing" style="min-height:100vh; background-color:#0F0F0F; border-bottom:1px solid #1F1F1F; padding:100px 40px; display:flex; flex-direction:column; justify-content:center;">
+  <div style="max-width:1100px; margin:0 auto; width:100%;">
+
+    <!-- Section header -->
+    <div style="position:relative; margin-bottom:64px;">
+      <div class="page-num">04</div>
+      <span class="fade-in" style="font-family:'Manrope',sans-serif; font-size:0.65rem; font-weight:600; letter-spacing:0.35em; color:#C9A962; text-transform:uppercase; display:block; margin-bottom:16px;">Investment</span>
+      <h2 class="fade-in fade-in-delay-1" style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:500; color:#FAF8F5; margin:0 0 12px 0; line-height:1.15;">
+        Choose Your Plan
+      </h2>
+      <div class="fade-in fade-in-delay-2" style="display:flex; align-items:center; gap:16px;">
+        <div style="width:48px; height:1px; background:#C9A962;"></div>
+        <div style="width:5px; height:5px; background:#C9A962; transform:rotate(45deg);"></div>
+      </div>
+    </div>
+
+    <!-- 3 Pricing Cards -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(290px, 1fr)); gap:1px; background:#1F1F1F; margin-bottom:48px;">
+
+      <!-- STARTER SITE -->
+      <div class="fade-in fade-in-delay-1" style="background:#0A0A0A; border:1px solid #1F1F1F; display:flex; flex-direction:column;">
+        <div style="padding:36px 32px; border-bottom:1px solid #1F1F1F; flex:1;">
+          <span style="font-family:'Manrope',sans-serif; font-size:0.65rem; font-weight:700; letter-spacing:0.3em; color:#666666; text-transform:uppercase; display:block; margin-bottom:20px;">Starter Site</span>
+          <div style="margin-bottom:8px;">
+            <span style="font-family:'Playfair Display',Georgia,serif; font-size:3.2rem; font-weight:500; color:#FAF8F5; line-height:1;">&#8369;8,000</span>
+          </div>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.75rem; color:#666666; margin:0 0 16px 0; letter-spacing:0.05em;">One-Time Payment</p>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.85rem; line-height:1.65; color:#888888; margin:0 0 28px 0;">Best for restaurants that just need an online presence and a shareable menu.</p>
+
+          <!-- Features -->
+          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;">
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#888888;">Homepage + Menu page</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#888888;">Mobile-first, fast-loading</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#888888;">Click-to-call button</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#888888;">Basic SEO setup</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#888888;">Deployment (Vercel/other)</span>
+            </li>
+          </ul>
+        </div>
+        <div style="padding:20px 32px; background:#0F0F0F; border-top:1px solid #1F1F1F;">
+          <p style="font-family:'Manrope',sans-serif; font-size:0.775rem; color:#888888; margin:0; font-style:italic;">No monthly fees. No lock-in.</p>
+        </div>
+      </div>
+
+      <!-- GROWTH SITE (RECOMMENDED) -->
+      <div class="fade-in fade-in-delay-2" style="background:#0A0A0A; border:1px solid #C9A962; display:flex; flex-direction:column; position:relative; box-shadow:0 0 40px rgba(201,169,98,0.08);">
+        <!-- Recommended badge -->
+        <div style="position:absolute; top:-1px; left:50%; transform:translateX(-50%);">
+          <span style="font-family:'Manrope',sans-serif; font-size:0.6rem; font-weight:700; letter-spacing:0.25em; color:#0A0A0A; background:#C9A962; padding:6px 20px; text-transform:uppercase; white-space:nowrap; display:block;">Recommended</span>
+        </div>
+        <div style="padding:52px 32px 36px; border-bottom:1px solid rgba(201,169,98,0.2); flex:1;">
+          <span style="font-family:'Manrope',sans-serif; font-size:0.65rem; font-weight:700; letter-spacing:0.3em; color:#C9A962; text-transform:uppercase; display:block; margin-bottom:20px;">Growth Site</span>
+          <div style="margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',Georgia,serif; font-size:3.2rem; font-weight:500; color:#FAF8F5; line-height:1;">&#8369;7,000</span>
+          </div>
+          <div style="margin-bottom:8px;">
+            <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; font-weight:600; color:#C9A962;">+ &#8369;1,500<span style="font-size:0.75rem; font-weight:400; color:#9A7D42;">/month</span></span>
+          </div>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.75rem; color:#666666; margin:0 0 16px 0; letter-spacing:0.05em;">Initial + Monthly Retainer</p>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.85rem; line-height:1.65; color:#888888; margin:0 0 28px 0;">Best for restaurants that want a polished site with regular menu updates and support.</p>
+
+          <!-- Features -->
+          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;">
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#888888;">Homepage + Menu + About page</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#C9A962; font-weight:500;">Everything in Starter +</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#888888;">Google Maps + analytics</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#888888;">Messenger chat integration</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#888888;">2 menu/content updates per month</span>
+            </li>
+          </ul>
+        </div>
+        <div style="padding:20px 32px; background:rgba(201,169,98,0.06); border-top:1px solid rgba(201,169,98,0.2);">
+          <p style="font-family:'Manrope',sans-serif; font-size:0.775rem; color:#C9A962; margin:0;">Includes 2 menu updates/month.</p>
+        </div>
+      </div>
+
+      <!-- PRO SITE -->
+      <div class="fade-in fade-in-delay-3" style="background:#0A0A0A; border:1px solid #1F1F1F; display:flex; flex-direction:column;">
+        <div style="padding:36px 32px; border-bottom:1px solid #1F1F1F; flex:1;">
+          <span style="font-family:'Manrope',sans-serif; font-size:0.65rem; font-weight:700; letter-spacing:0.3em; color:#F87171; text-transform:uppercase; display:block; margin-bottom:20px;">Pro Site</span>
+          <div style="margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',Georgia,serif; font-size:3.2rem; font-weight:500; color:#FAF8F5; line-height:1;">&#8369;6,000</span>
+          </div>
+          <div style="margin-bottom:8px;">
+            <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; font-weight:600; color:#F87171;">+ &#8369;3,000<span style="font-size:0.75rem; font-weight:400; color:#b85f5f;">/month</span></span>
+          </div>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.75rem; color:#666666; margin:0 0 16px 0; letter-spacing:0.05em;">Initial + Monthly Retainer</p>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.85rem; line-height:1.65; color:#888888; margin:0 0 28px 0;">Best for restaurants that want to stay active, grow online, and attract more customers.</p>
+
+          <!-- Features -->
+          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;">
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#888888;">Full custom site + gallery page</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#C9A962; font-weight:500;">Everything in Growth +</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#888888;">Social media content support</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#888888;">Priority support</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#888888;">4 menu/content updates per month</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px;">
+              <i data-lucide="check" style="width:16px; height:16px; color:#4ADE80; stroke-width:2.5; flex-shrink:0;"></i>
+              <span style="font-family:'Manrope',sans-serif; font-size:0.85rem; color:#888888;">Monthly performance check + insights</span>
+            </li>
+          </ul>
+        </div>
+        <div style="padding:20px 32px; background:rgba(201,169,98,0.04); border-top:1px solid rgba(201,169,98,0.15);">
+          <p style="font-family:'Manrope',sans-serif; font-size:0.775rem; color:#C9A962; margin:0;">Priority support + monthly insights.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Client covers box -->
+    <div class="fade-in" style="border:1px solid #1F1F1F; padding:32px 36px;">
+      <p style="font-family:'Manrope',sans-serif; font-size:0.65rem; font-weight:700; letter-spacing:0.3em; color:#666666; text-transform:uppercase; margin:0 0 24px 0;">What the Client Covers</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:24px; margin-bottom:20px;">
+        <div style="display:flex; align-items:flex-start; gap:14px;">
+          <i data-lucide="globe" style="width:18px; height:18px; color:#888888; stroke-width:1.5; margin-top:2px; flex-shrink:0;"></i>
+          <div>
+            <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; font-weight:600; color:#FAF8F5; margin:0 0 4px 0;">Domain</p>
+            <p style="font-family:'Manrope',sans-serif; font-size:0.8rem; color:#666666; margin:0;">&#8369;800–&#8369;1,500/yr</p>
+          </div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:14px;">
+          <i data-lucide="server" style="width:18px; height:18px; color:#888888; stroke-width:1.5; margin-top:2px; flex-shrink:0;"></i>
+          <div>
+            <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; font-weight:600; color:#FAF8F5; margin:0 0 4px 0;">Hosting</p>
+            <p style="font-family:'Manrope',sans-serif; font-size:0.8rem; color:#666666; margin:0;">Free via Vercel or paid</p>
+          </div>
+        </div>
+      </div>
+      <p style="font-family:'Manrope',sans-serif; font-size:0.825rem; line-height:1.7; color:#666666; margin:0; border-top:1px solid #1F1F1F; padding-top:20px;">
+        We guide you through setup, but everything stays under your account. No lock-in.
+      </p>
+    </div>
+
+    <!-- Unified tagline -->
+    <div class="fade-in" style="text-align:center; padding:40px 0 0;">
+      <p style="font-family:'Playfair Display',Georgia,serif; font-size:1.35rem; font-weight:500; color:#C9A962; margin:0; font-style:italic;">We build it. You own it. We maintain it.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 6: TIMELINE & PROCESS
+     ============================================================ -->
+<section id="timeline" style="min-height:100vh; background-color:#0A0A0A; border-bottom:1px solid #1F1F1F; padding:100px 40px; display:flex; flex-direction:column; justify-content:center;">
+  <div style="max-width:1100px; margin:0 auto; width:100%;">
+
+    <!-- Section header -->
+    <div style="position:relative; margin-bottom:64px;">
+      <div class="page-num">05</div>
+      <span class="fade-in" style="font-family:'Manrope',sans-serif; font-size:0.65rem; font-weight:600; letter-spacing:0.35em; color:#C9A962; text-transform:uppercase; display:block; margin-bottom:16px;">Timeline & Process</span>
+      <h2 class="fade-in fade-in-delay-1" style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:500; color:#FAF8F5; margin:0 0 24px 0; line-height:1.15;">
+        How We Work
+      </h2>
+      <div class="fade-in fade-in-delay-2" style="display:flex; align-items:center; gap:16px;">
+        <div style="width:48px; height:1px; background:#C9A962;"></div>
+        <div style="width:5px; height:5px; background:#C9A962; transform:rotate(45deg);"></div>
+      </div>
+    </div>
+
+    <!-- Timeline steps -->
+    <div style="display:flex; flex-direction:column; gap:0; margin-bottom:56px;">
+
+      <!-- Step 1 -->
+      <div class="fade-in fade-in-delay-1" style="display:grid; grid-template-columns:80px 1fr; gap:0; border-bottom:1px solid #1F1F1F;">
+        <div style="padding:36px 0; display:flex; flex-direction:column; align-items:center; border-right:1px solid #1F1F1F;">
+          <div style="width:44px; height:44px; background:#C9A962; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:500; color:#0A0A0A;">1</span>
+          </div>
+        </div>
+        <div style="padding:36px 36px 36px 40px;">
+          <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin-bottom:12px;">
+            <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.2rem; font-weight:500; color:#FAF8F5; margin:0;">Discovery & Planning</h3>
+            <span style="font-family:'Manrope',sans-serif; font-size:0.7rem; font-weight:600; letter-spacing:0.2em; color:#C9A962; text-transform:uppercase;">Day 1–2</span>
+          </div>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; line-height:1.75; color:#666666; margin:0;">We gather your menu, photos, and branding preferences. You share your vision — we map the blueprint.</p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="fade-in fade-in-delay-2" style="display:grid; grid-template-columns:80px 1fr; gap:0; border-bottom:1px solid #1F1F1F;">
+        <div style="padding:36px 0; display:flex; flex-direction:column; align-items:center; border-right:1px solid #1F1F1F;">
+          <div style="width:44px; height:44px; border:1px solid #1F1F1F; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:500; color:#888888;">2</span>
+          </div>
+        </div>
+        <div style="padding:36px 36px 36px 40px;">
+          <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin-bottom:12px;">
+            <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.2rem; font-weight:500; color:#FAF8F5; margin:0;">Design & Development</h3>
+            <span style="font-family:'Manrope',sans-serif; font-size:0.7rem; font-weight:600; letter-spacing:0.2em; color:#888888; text-transform:uppercase;">Day 3–5</span>
+          </div>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; line-height:1.75; color:#666666; margin:0;">We build the full site — design, code, menu page, and photo integration. You see progress in real time.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="fade-in fade-in-delay-3" style="display:grid; grid-template-columns:80px 1fr; gap:0; border-bottom:1px solid #1F1F1F;">
+        <div style="padding:36px 0; display:flex; flex-direction:column; align-items:center; border-right:1px solid #1F1F1F;">
+          <div style="width:44px; height:44px; border:1px solid #1F1F1F; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:500; color:#888888;">3</span>
+          </div>
+        </div>
+        <div style="padding:36px 36px 36px 40px;">
+          <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin-bottom:12px;">
+            <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.2rem; font-weight:500; color:#FAF8F5; margin:0;">Review & Revisions</h3>
+            <span style="font-family:'Manrope',sans-serif; font-size:0.7rem; font-weight:600; letter-spacing:0.2em; color:#888888; text-transform:uppercase;">Day 5–6</span>
+          </div>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; line-height:1.75; color:#666666; margin:0;">You review the live preview and request changes. We refine until it's exactly right.</p>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="fade-in fade-in-delay-4" style="display:grid; grid-template-columns:80px 1fr; gap:0;">
+        <div style="padding:36px 0; display:flex; flex-direction:column; align-items:center; border-right:1px solid #1F1F1F;">
+          <div style="width:44px; height:44px; background:rgba(74,222,128,0.12); border:1px solid rgba(74,222,128,0.3); display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:500; color:#4ADE80;">4</span>
+          </div>
+        </div>
+        <div style="padding:36px 36px 36px 40px;">
+          <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin-bottom:12px;">
+            <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.2rem; font-weight:500; color:#FAF8F5; margin:0;">Launch & Handover</h3>
+            <span style="font-family:'Manrope',sans-serif; font-size:0.7rem; font-weight:600; letter-spacing:0.2em; color:#4ADE80; text-transform:uppercase;">Day 7 — Go Live!</span>
+          </div>
+          <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; line-height:1.75; color:#666666; margin:0;">We deploy your site and hand over full ownership — credentials, code, and documentation included.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Summary bar -->
+    <div class="fade-in" style="background:#0F0F0F; border:1px solid #1F1F1F; padding:28px 36px; display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:32px;">
+      <div style="text-align:center;">
+        <p style="font-family:'Playfair Display',Georgia,serif; font-size:1.75rem; font-weight:500; color:#C9A962; margin:0 0 6px 0;">5–7</p>
+        <p style="font-family:'Manrope',sans-serif; font-size:0.75rem; font-weight:600; letter-spacing:0.2em; color:#666666; text-transform:uppercase; margin:0;">Days Total</p>
+      </div>
+      <div style="text-align:center; border-left:1px solid #1F1F1F; border-right:1px solid #1F1F1F;">
+        <p style="font-family:'Playfair Display',Georgia,serif; font-size:1.75rem; font-weight:500; color:#C9A962; margin:0 0 6px 0;">2</p>
+        <p style="font-family:'Manrope',sans-serif; font-size:0.75rem; font-weight:600; letter-spacing:0.2em; color:#666666; text-transform:uppercase; margin:0;">Revision Rounds</p>
+      </div>
+      <div style="text-align:center;">
+        <p style="font-family:'Playfair Display',Georgia,serif; font-size:1.75rem; font-weight:500; color:#C9A962; margin:0 0 6px 0;">100%</p>
+        <p style="font-family:'Manrope',sans-serif; font-size:0.75rem; font-weight:600; letter-spacing:0.2em; color:#666666; text-transform:uppercase; margin:0;">Your Ownership</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 7: WHY CHOOSE US & CTA
+     ============================================================ -->
+<section id="why-us" style="min-height:100vh; background-color:#0F0F0F; padding:100px 40px; display:flex; flex-direction:column; justify-content:center;">
+  <div style="max-width:1100px; margin:0 auto; width:100%;">
+
+    <!-- Section header -->
+    <div style="position:relative; margin-bottom:64px;">
+      <div class="page-num">06</div>
+      <span class="fade-in" style="font-family:'Manrope',sans-serif; font-size:0.65rem; font-weight:600; letter-spacing:0.35em; color:#C9A962; text-transform:uppercase; display:block; margin-bottom:16px;">Why Us</span>
+      <h2 class="fade-in fade-in-delay-1" style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:500; color:#FAF8F5; margin:0 0 24px 0; line-height:1.15;">
+        Why Fishbone Creative Solutions?
+      </h2>
+      <div class="fade-in fade-in-delay-2" style="display:flex; align-items:center; gap:16px;">
+        <div style="width:48px; height:1px; background:#C9A962;"></div>
+        <div style="width:5px; height:5px; background:#C9A962; transform:rotate(45deg);"></div>
+      </div>
+    </div>
+
+    <!-- 2x2 cards -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1px; background:#1F1F1F; margin-bottom:80px;">
+
+      <!-- Zero Lock-In -->
+      <div class="fade-in fade-in-delay-1" style="background:#0A0A0A; padding:40px 36px;">
+        <div style="margin-bottom:20px; width:44px; height:44px; border:1px solid rgba(201,169,98,0.25); display:flex; align-items:center; justify-content:center;">
+          <i data-lucide="unlock" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:500; color:#FAF8F5; margin:0 0 12px 0;">Zero Lock-In</h3>
+        <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; line-height:1.75; color:#666666; margin:0;">Everything you pay for is yours. Walk away anytime with your domain, hosting, and full codebase.</p>
+      </div>
+
+      <!-- Transparent Pricing -->
+      <div class="fade-in fade-in-delay-2" style="background:#0A0A0A; padding:40px 36px;">
+        <div style="margin-bottom:20px; width:44px; height:44px; border:1px solid rgba(201,169,98,0.25); display:flex; align-items:center; justify-content:center;">
+          <i data-lucide="receipt" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:500; color:#FAF8F5; margin:0 0 12px 0;">Transparent Pricing</h3>
+        <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; line-height:1.75; color:#666666; margin:0;">No hidden fees, no surprise invoices. What you see is what you pay — clearly outlined from day one.</p>
+      </div>
+
+      <!-- Fast Delivery -->
+      <div class="fade-in fade-in-delay-3" style="background:#0A0A0A; padding:40px 36px;">
+        <div style="margin-bottom:20px; width:44px; height:44px; border:1px solid rgba(201,169,98,0.25); display:flex; align-items:center; justify-content:center;">
+          <i data-lucide="zap" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:500; color:#FAF8F5; margin:0 0 12px 0;">Fast Delivery</h3>
+        <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; line-height:1.75; color:#666666; margin:0;">Live in 5–7 days, not months. We move with purpose without sacrificing quality or attention to detail.</p>
+      </div>
+
+      <!-- Ongoing Partnership -->
+      <div class="fade-in fade-in-delay-4" style="background:#0A0A0A; padding:40px 36px;">
+        <div style="margin-bottom:20px; width:44px; height:44px; border:1px solid rgba(201,169,98,0.25); display:flex; align-items:center; justify-content:center;">
+          <i data-lucide="handshake" style="width:20px; height:20px; color:#C9A962; stroke-width:1.5;"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:500; color:#FAF8F5; margin:0 0 12px 0;">Ongoing Partnership</h3>
+        <p style="font-family:'Manrope',sans-serif; font-size:0.875rem; line-height:1.75; color:#666666; margin:0;">We're not a one-and-done agency. Our retainer plans keep your menu updated and your site growing with your restaurant.</p>
+      </div>
+
+    </div>
+
+    <!-- CTA Section -->
+    <div class="fade-in cta-border" style="padding:64px 56px; text-align:center; background:#0A0A0A; margin-bottom:48px;">
+      <span style="font-family:'Manrope',sans-serif; font-size:0.65rem; font-weight:600; letter-spacing:0.35em; color:#C9A962; text-transform:uppercase; display:block; margin-bottom:20px;">Ready to Begin?</span>
+      <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(1.8rem,4vw,3rem); font-weight:500; color:#FAF8F5; margin:0 0 16px 0; line-height:1.2;">
+        Ready to Put The Backyard<br>on the Map?
+      </h2>
+      <p style="font-family:'Manrope',sans-serif; font-size:0.95rem; line-height:1.75; color:#888888; margin:0 auto 40px; max-width:480px;">
+        Let's turn The Backyard Place's online presence into something that brings more customers through your doors. We're ready when you are.
+      </p>
+      <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:24px; margin-bottom:40px;">
+        <a href="tel:09511306264" class="btn-gold" style="text-decoration:none;">
+          LET'S TALK
+        </a>
+      </div>
+
+      <!-- What Happens Next -->
+      <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:40px; margin-bottom:48px; padding:28px 0; border-top:1px solid #1F1F1F; border-bottom:1px solid #1F1F1F;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-family:'Manrope',sans-serif; font-size:0.7rem; font-weight:700; color:#0A0A0A; background:#C9A962; width:24px; height:24px; display:flex; align-items:center; justify-content:center;">1</span>
+          <span style="font-family:'Manrope',sans-serif; font-size:0.825rem; color:#888888;">Reply to this proposal</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-family:'Manrope',sans-serif; font-size:0.7rem; font-weight:700; color:#0A0A0A; background:#C9A962; width:24px; height:24px; display:flex; align-items:center; justify-content:center;">2</span>
+          <span style="font-family:'Manrope',sans-serif; font-size:0.825rem; color:#888888;">We schedule a quick call</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-family:'Manrope',sans-serif; font-size:0.7rem; font-weight:700; color:#0A0A0A; background:#C9A962; width:24px; height:24px; display:flex; align-items:center; justify-content:center;">3</span>
+          <span style="font-family:'Manrope',sans-serif; font-size:0.825rem; color:#888888;">We start building</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="fade-in" style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:16px; padding-top:32px; border-top:1px solid #1F1F1F;">
+      <p style="font-family:'Manrope',sans-serif; font-size:0.775rem; color:#444444; margin:0;">
+        &copy; 2026 Fishbone Creative Solutions. All rights reserved.
+      </p>
+      <p style="font-family:'Manrope',sans-serif; font-size:0.775rem; color:#444444; margin:0; font-style:italic;">
+        This proposal is valid for 30 days. Pricing may be adjusted after this period.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+  // Initialize Lucide icons
+  lucide.createIcons();
+
+  // Scroll-triggered fade-in using IntersectionObserver
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px',
+    }
+  );
+
+  // Observe all fade-in elements
+  document.querySelectorAll('.fade-in').forEach((el) => {
+    observer.observe(el);
+  });
+
+  // Trigger cover section immediately (it's already in view)
+  document.querySelectorAll('#cover .fade-in').forEach((el) => {
+    setTimeout(() => el.classList.add('visible'), 100);
+  });
+</script>
+
+</body>
+</html>
