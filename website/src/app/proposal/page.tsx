@@ -175,7 +175,7 @@ const tiers = [
   {
     name: "Starter Site",
     tagline: "Best for restaurants that just need an online presence and a shareable menu.",
-    price: "₱8,000",
+    price: "₱10,000",
     monthly: null,
     pillNote: "One-Time Payment",
     bullets: [
@@ -194,7 +194,7 @@ const tiers = [
   {
     name: "Growth Site",
     tagline: "Best for restaurants that want a polished site with regular menu updates and support.",
-    price: "₱7,000",
+    price: "₱9,000",
     monthly: "₱1,500",
     pillNote: "Initial + Monthly Retainer",
     bullets: [
@@ -215,7 +215,7 @@ const tiers = [
   {
     name: "Pro Site",
     tagline: "Best for restaurants that want to stay active, grow online, and attract more customers.",
-    price: "₱6,000",
+    price: "₱8,000",
     monthly: "₱3,000",
     pillNote: "Initial + Monthly Retainer",
     bullets: [
@@ -290,7 +290,7 @@ export default function ProposalPage() {
             </div>
             <div>
               <div className="text-white/50 text-xs uppercase tracking-wider mb-1">Investment</div>
-              <div className="font-bold text-white">From ₱6,000 + retainer</div>
+              <div className="font-bold text-white">From ₱8,000 + retainer</div>
             </div>
             <div>
               <div className="text-white/50 text-xs uppercase tracking-wider mb-1">Smart features</div>
@@ -635,9 +635,9 @@ export default function ProposalPage() {
               <div className="grid grid-cols-[minmax(180px,1.4fr)_1fr_1fr_1fr] bg-neutral-50 border-b border-neutral-200">
                 <div className="p-4 sm:p-5"></div>
                 {[
-                  { name: "Starter Site", price: "₱8,000", monthly: null,             highlight: false },
-                  { name: "Growth Site",  price: "₱7,000", monthly: "+ ₱1,500/mo",    highlight: true },
-                  { name: "Pro Site",     price: "₱6,000", monthly: "+ ₱3,000/mo",    highlight: false },
+                  { name: "Starter Site", price: "₱10,000", monthly: null,            highlight: false },
+                  { name: "Growth Site",  price: "₱9,000",  monthly: "+ ₱1,500/mo",   highlight: true },
+                  { name: "Pro Site",     price: "₱8,000",  monthly: "+ ₱3,000/mo",   highlight: false },
                 ].map((t) => (
                   <div key={t.name} className={`p-4 sm:p-5 text-center border-l border-neutral-200 ${t.highlight ? "bg-[#ffb868]/10" : ""}`}>
                     {t.highlight && (
